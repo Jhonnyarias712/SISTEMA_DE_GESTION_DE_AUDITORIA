@@ -56,7 +56,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            'D:/SISTEMA_DE_GESTION_DE_AUDITORIA/SGA/SGA/LOGIN/templates', # Agrega la ruta a la carpeta de plantillas de tu aplicación LOGIN
+            'D:/SISTEMA_DE_GESTION_DE_AUDITORIA/SGA/LOGIN/templates', # Agrega la ruta a la carpeta de plantillas de tu aplicación LOGIN
         ],
         'APP_DIRS': True,
         'OPTIONS': {
