@@ -1,0 +1,23 @@
+git --ultima version
+visual estudio code -descargan extencion de pyhthon
+DESCARGAR PYTHON
+--
+git clone https://github.com/Jhonnyarias712/SISTEMA_DE_GESTION_DE_AUDITORIA.git
+RECOMENDACION DISCO D
+ABRIR EN LA RUTA 
+ejecutar comandos para tener los ddl necesecarios 
+pip install virtualenv 
+
+
+python -m django --version 
+#verificar si se instalo django 
+pip install django 
+
+--ejecutar el proyecto
+python manage.py runserver
+
+--en caso de que tenga eerror por las ruta modificar las rutas 
+
+
+
+Agregar la base de datos 
