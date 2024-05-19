@@ -8,5 +8,5 @@ def crea_user_view(request):
     context = {
         'MENSAJE': 'CREAR AUDITOR',      
     }
-    return render(request, 'lol.html', context)
+    return render(request, 'crear_usuario.html', context)
 
