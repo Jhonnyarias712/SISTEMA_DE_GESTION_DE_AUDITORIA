@@ -15,3 +15,9 @@ def crea_plantilla_view(request):
         'MENSAJE': 'CREAR AUDITOR',      
     }
     return render(request, 'crear_plantilla.html',context)
+
+def agendar_auditoria_view(request):
+    context = {
+        'MENSAJE': 'CREAR AUDITOR',      
+    }
+    return render(request, 'agendar_auditoria.html',context)

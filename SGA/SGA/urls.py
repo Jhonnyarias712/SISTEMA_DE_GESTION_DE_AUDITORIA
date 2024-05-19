@@ -24,4 +24,5 @@ urlpatterns = [
     #path('XD/', include('LOGIN.urls'),name='XD'),
     path('LOGIN/crear_usuario/', include('LOGIN.urls'),name='CREAR_USUARIO'),
     path('LOGIN/crear_plantilla/', include('LOGIN.urls'),name='CREAR_USUARIO'),
+    path('LOGIN/agendar_auditoria/', include('LOGIN.urls'),name='AGENDAR_AUDITORIA'),
 ]
