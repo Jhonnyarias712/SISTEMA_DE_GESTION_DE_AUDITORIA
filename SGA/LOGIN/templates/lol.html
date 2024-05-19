@@ -1,12 +1,224 @@
 <!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CREA USERS</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    form {
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    input[type="text"],
+    input[type="hidden"],
+    textarea {
+      width: 100%;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+    input[type="submit"] {
+      background-color: #007BFF;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+    input[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 10px;
+      border: 1px solid #ccc;
+      text-align: left;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    input[type="search"] {
+      width: 50%;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+    #search-button {
+      background-color: #007BFF;
+      color: #fff;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+    #search-button:hover {
+      background-color: #0056b3;
+    }
+  </style>
 </head>
 <body>
-    <form >
-        <p> Hola mundo</p>
-    </form>
+  <!-- Template Form -->
+<form style="text-align: center;">
+  <h2>Crear Plantilla</h2>
+  
+  <div id="campo1" style="display: flex; justify-content: flex-center; margin-bottom: 10px;">
+    <label for="template-name" style="width: 200px;">Nombre de la Plantilla:</label>
+    <input type="text" id="template-name" name="template-name" style="width: 200px;">
+  </div>
+  
+  <div id="campo2" style="display: flex; justify-content: flex-center; margin-bottom: 10px;">
+    <label for="theme" style="width: 200px;">Tema:</label>
+    <input type="text" id="theme" name="theme" style="width: 200px;">
+  </div>
+  
+  <div id="campo3" style="display: flex; justify-content: flex-center; margin-bottom: 10px;">
+    <label for="owner" style="width: 200px;">Propietario:</label> <!-- POR DETRAS SERA EL NOMBRE COMPLETO DEL USUARIO AUDITOR -->
+    <input type="hidden" id="owner" name="owner" value="OCULTO-OWNER(FULL_NAME)">
+  </div>
+  
+  <div id="campo4" style="display: flex; justify-content: flex-center; margin-bottom: 10px;">
+    <label for="description" style="width: 200px;">Descripción:</label>
+    <textarea id="description" name="description" style="width: 200px; height: 100px;"></textarea>
+  </div>
+  
+  <div id="campo5" style="display: flex; justify-content: flex-center; margin-bottom: 10px;">
+  <input type="submit" value="REGISTRAR PLANTILLA" style="width: 195px;">
+</div>
+
+
+  
+  
+  
+</form>
+
+
+
+
+
+
+
+  <!-- Template List -->
+  <!-- Search Bar -->
+  <input type="search" id="search" name="search" placeholder="BUSCAR">
+  <button type="submit" id="search-button">Buscar</button>
+  
+  <div id="tablaPlantillas" style="display: flex; align-items: center;">
+  <table style="margin-right: 20px;">
+    <thead>
+      <tr>
+        <th>ID_PLANTILLA</th>
+        <th>NOMBRE_PLANTILLA</th>
+        <th>TEMA</th>
+        <th>OWNER</th>
+        <th>DESCRIPTION</th>
+        <th>CREATED_DATE</th>
+        <th>ACCIONES</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Template List Items will be rendered here -->
+    </tbody>
+  </table>
+  
+  <!-- Nuevo div con dos botones -->
+  <div id="accionesPlantilla" style="margin-left: auto;">
+    <button id="actualizarPlantilla">Actualizar</button>
+    <button id="editarFormulario">Editar formulario de esta plantilla</button>
+  </div>
+</div>
+
+
+
+
+
+
+  <script>
+    const owner = "OWNER_FULL_NAME";
+
+    // Template List
+    fetch('http://localhost:3000/templates')
+      .then(response => response.json())
+      .then(data => {
+        let tableBody = document.querySelector('tbody');
+        data.forEach(item => {
+          let tr = document.createElement('tr');
+          let id = document.createElement('td');
+          let name = document.createElement('td');
+          let theme = document.createElement('td');
+          let owner = document.createElement('td');
+          let description = document.createElement('td');
+          let createdDate = document.createElement('td');
+          let actions = document.createElement('td');
+
+          id.textContent = item.id;
+          name.textContent = item.name;
+          theme.textContent = item.theme;
+          owner.textContent = item.owner;
+          description.textContent = item.description;
+          createdDate.textContent = item.created_date;
+          actions.innerHTML = `<button type="button">Actualizar</button> <button type="button">Eliminar</button>`;
+
+          tr.appendChild(id);
+          tr.appendChild(name);
+          tr.appendChild(theme);
+          tr.appendChild(owner);
+          tr.appendChild(description);
+          tr.appendChild(createdDate);
+          tr.appendChild(actions);
+
+          tableBody.appendChild(tr);
+        });
+      });
+
+    // Template Search
+    document.getElementById('search-button').addEventListener('click', function(e) {
+      e.preventDefault();
+      let searchValue = document.getElementById('search').value;
+      fetch(`http://localhost:3000/templates?search=${searchValue}`)
+        .then(response => response.json())
+        .then(data => {
+          let tableBody = document.querySelector('tbody');
+          tableBody.innerHTML = '';
+          data.forEach(item => {
+            let tr = document.createElement('tr');
+            let id = document.createElement('td');
+            let name = document.createElement('td');
+            let theme = document.createElement('td');
+            let owner = document.createElement('td');
+            let description = document.createElement('td');
+            let createdDate = document.createElement('td');
+            let actions = document.createElement('td');
+
+            id.textContent = item.id;
+            name.textContent = item.name;
+            theme.textContent = item.theme;
+            owner.textContent = item.owner;
+            description.textContent = item.description;
+            createdDate.textContent = item.created_date;
+            actions.innerHTML = `<button type="button">Actualizar</button> <button type="button">Eliminar</button>`;
+
+            tr.appendChild(id);
+            tr.appendChild(name);
+            tr.appendChild(theme);
+            tr.appendChild(owner);
+            tr.appendChild(description);
+            tr.appendChild(createdDate);
+            tr.appendChild(actions);
+
+            tableBody.appendChild(tr);
+          });
+        });
+    });
+  </script>
 </body>
 </html>
