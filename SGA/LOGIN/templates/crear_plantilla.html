@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CREAR PLANTILLA</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'admin/css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'admin/css/dark_mode.css' %}">
+    <link rel="stylesheet" href="{% static 'admin/css/nav_sidebar.css' %}">
+    <link rel="stylesheet" href="{% static 'admin/css/forms.css' %}">
+    <link rel="stylesheet" href="{% static 'admin/css/responsive.css' %}">
+    <script src="./js/vendor/theme.js" defer></script>
+    <script src="./vendor/nav_sidebar.js" defer></script>
+    <script src="/admin/jsi18n/"></script>
+    <script src="./vendor/jquery/jquery.js"></script>
+    <script src="./vendor/calendar.js"></script>
+    <script src="./vendor/jquery.init.js"></script>
+    <script src="./admin/DateTimeShortcuts.js"></script>
+    <script src="./vendor/core.js"></script>
+    <script src="./admin/RelatedObjectLookups.js"></script>
+    <script src="./vendor/actions.js"></script>
+    <script src="./vendor/urlify.js"></script>
+    <script src="./vendor/prepopulate.js"></script>
+    <script src="./vendor/xregexp/xregexp.js"></script>
+    <meta name="robots" content="NONE,NOARCHIVE">
+</head>
+<body class="app-LOGIN model-plantilla change-form" data-admin-utc-offset="0">
+<a href="#content-start" class="skip-to-content-link">Skip to main content</a>
+<!-- Container -->
+<div id="container">
+    <!-- Header -->
+    <header id="header">
+        <div id="branding">
+            <div id="site-name"><a href="/admin/">SISTEMA DE GESTION DE AUDITORIA</a></div>
+        </div>
+        <div id="user-tools">
+            Welcome,
+            <strong>USER</strong>.         
+            <form id="logout-form" method="post" action="/admin/logout/">
+                <input type="hidden" name="csrfmiddlewaretoken" value="iuJXMFx3kAvsE1jefFwCjmGBodfonr6uUwiCnzTeRSsYw1HLA4Y0MoFuYb8qHKWz">
+                <button type="submit">Log out</button>
+            </form>
+            <button class="theme-toggle">
+                    <div class="visually-hidden theme-label-when-auto">Toggle theme (current theme auto)</div>
+                    <div class="visually-hidden theme-label-when-light">Toggle theme (current theme light)</div>
+                    <div class="visually-hidden theme-label-when-dark">Toggle theme (current theme dark)</div>
+                    <svg aria-hidden="true" class="theme-icon-when-auto">
+                        <use xlink:href="#icon-auto"></use>
+                    </svg>
+                    <svg aria-hidden="true" class="theme-icon-when-dark">
+                        <use xlink:href="#icon-moon"></use>
+                    </svg>
+                    <svg aria-hidden="true" class="theme-icon-when-light">
+                        <use xlink:href="#icon-sun"></use>
+                    </svg>
+                </button>
+        </div>
+    </header>
+    <!-- END Header -->
+    <nav aria-label="Breadcrumbs">
+        <div class="breadcrumbs">
+            <a href="/admin/">Home</a>
+            &rsaquo; <a href="/admin/LOGIN/">Login</a>
+            &rsaquo; <a href="/admin/LOGIN/plantilla/">Plantillas</a>
+            &rsaquo; Add plantilla
+        </div>
+    </nav>
+    <div class="main" id="main">
+         <main id="content-start" class="content" tabindex="-1">
+            <!-- Content -->
+            <div id="content" class="colM">
+                <h1>CREAR PLANTILLA</h1>
+                <div id="content-main">
+                    <form method="post" id="plantilla_form" novalidate>
+                        <input type="hidden" name="csrfmiddlewaretoken" value="iuJXMFx3kAvsE1jefFwCjmGBodfonr6uUwiCnzTeRSsYw1HLA4Y0MoFuYb8qHKWz">
+                        <div>
+                            <fieldset class="module aligned ">
+                                <div class="form-row field-nombre_plantilla">
+                                    <div>
+                                        <div class="flex-container">
+                                            <label class="required" for="id_nombre_plantilla">Nombre plantilla:</label>
+                                            <input type="text" name="nombre_plantilla" class="vTextField" maxlength="100" required id="id_nombre_plantilla">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row field-tema">
+                                    <div>
+                                        <div class="flex-container">
+                                            <label class="required" for="id_tema">Tema:</label>
+                                            <input type="text" name="tema" class="vTextField" maxlength="100" required id="id_tema">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row field-owner">
+                                    <div>
+                                        <div class="flex-container">
+                                            <label class="required" for="id_owner">Auditor:</label>
+                                            <div class="related-widget-wrapper" data-model-ref="users">
+                                                <select name="owner" required id="id_owner">
+                                                    <option value="" selected>---------</option>
+                                                </select>
+                                                <a class="related-widget-wrapper-link change-related" id="change_id_owner"
+                                                   data-href-template="/admin/LOGIN/users/__fk__/change/?_to_field=id_usuario&amp;_popup=1"
+                                                   data-popup="yes" title="Change selected users"><img src="/static/admin/img/icon-changelink.svg" alt="" width="20" height="20"></a>
+                                                <a class="related-widget-wrapper-link add-related" id="add_id_owner"
+                                                   data-popup="yes" href="/admin/LOGIN/users/add/?_to_field=id_usuario&amp;_popup=1"
+                                                   title="Add another users"><img src="/static/admin/img/icon-addlink.svg" alt="" width="20" height="20"></a>
+                                                <a class="related-widget-wrapper-link view-related" id="view_id_owner"
+                                                   data-href-template="/admin/LOGIN/users/__fk__/change/?_to_field=id_usuario"
+                                                   title="View selected users"><img src="/static/admin/img/icon-viewlink.svg" alt="" width="20" height="20"></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row field-description">
+                                    <div>
+                                        <div class="flex-container">
+                                            <label class="required" for="id_description">Descripcion:</label>
+                                            <input type="text" name="description" class="vTextField" maxlength="1000" required id="id_description">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row field-created_date">
+                                    <div>
+                                        <div class="flex-container">
+                                            <label class="required">Fecha creacion</label>
+                                            <p class="datetime">
+                                                Date: <input type="text" name="created_date_0" class="vDateField" size="10" required id="id_created_date_0">
+                                                <br>
+                                                Time: <input type="text" name="created_date_1" class="vTimeField" size="8" required id="id_created_date_1">
+                                            </p><div><label >Formato: YYYY-MM-DD</label>
+											<label >Formato: HH24:MI:SS</label></div>												
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <div class="submit-row">
+                                <input type="submit" value="GUARDAR" class="default" name="_save">
+                                <input type="submit" value="GUARDAR Y AGREGAR OTRO" name="_addanother">
+                                <input type="submit" value="GUARDAR Y CONTINUAR EDITANDO" name="_continue">
+                            </div>
+							
+							
+
+
+
+
+
+							
+							<h1>FORMULARIO DE LA PLANTILLA</h1>
+							<!-- Formulario para agregar actividad -->
+							<fieldset class="module aligned">
+								<div class="form-row field-plantilla">
+									<!-- Contenido del formulario -->
+								</div>
+								<div class="form-row field-actividad">
+									<!-- Contenido del formulario -->
+								</div>
+							</fieldset>
+							<!-- Fin del formulario de actividad -->
+								<!-- Formulario para agregar actividad -->
+                            <fieldset class="module aligned ">
+                                <div class="form-row field-plantilla">
+                                    <div>
+                                        <div class="flex-container">
+                                            <label class="required" for="id_plantilla">Plantilla:</label>
+                                            <div class="related-widget-wrapper" data-model-ref="plantilla">
+                                                <select name="plantilla" required id="id_plantilla">
+                                                    <option value="" selected>---------</option>
+                                                </select>
+                                                <a class="related-widget-wrapper-link change-related" id="change_id_plantilla"
+                                                   data-href-template="/admin/LOGIN/plantilla/__fk__/change/?_to_field=id_plantilla&amp;_popup=1"
+                                                   data-popup="yes" title="Change selected plantilla"><img src="/static/admin/img/icon-changelink.svg" alt="" width="20" height="20"></a>
+                                                <a class="related-widget-wrapper-link add-related" id="add_id_plantilla"
+                                                   data-popup="yes" href="/admin/LOGIN/plantilla/add/?_to_field=id_plantilla&amp;_popup=1"
+                                                   title="Add another plantilla"><img src="/static/admin/img/icon-addlink.svg" alt="" width="20" height="20"></a>
+                                                <a class="related-widget-wrapper-link view-related" id="view_id_plantilla"
+                                                   data-href-template="/admin/LOGIN/plantilla/__fk__/change/?_to_field=id_plantilla"
+                                                   title="View selected plantilla"><img src="/static/admin/img/icon-viewlink.svg" alt="" width="20" height="20"></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row field-actividad">
+                                    <div>
+                                        <div class="flex-container">
+                                            <label class="required" for="id_actividad">Actividad:</label>
+                                            <input type="text" name="actividad" class="vTextField" maxlength="1200" required id="id_actividad">
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <!--Fin del formulario de actividad -->
+							<!-- Lista de actividades -->
+							<div id="actividades-lista">
+								<h2>Lista de Actividades</h2>
+								<ul id="lista-actividades">
+									<!-- Aquí se añadirán dinámicamente las actividades -->
+								</ul>
+							</div>
+							<!-- Fin de la lista de actividades -->
+
+							<!-- Tabla de actividades -->
+							<table id="tabla-actividades">
+								<thead>
+									<tr>
+										<th>fk_id_plantilla</th>
+										<th>Actividad</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>1</td>
+										<td>REVISAR DOCUMENTO DE CAJA CHICA</td>
+									</tr>
+								</tbody>
+							</table>
+							<!-- Fin de la tabla de actividades -->
+
+							<!-- Botones de guardado -->
+							<div class="submit-row">
+								<input type="submit" value="GUARDAR" class="default" name="_save">
+								<input type="submit" value="GUARDAR Y AGREGAR OTRO" name="_addanother">
+								<input type="submit" value="GUARDAR Y CONTINUAR EDITANDO" name="_continue">
+							</div>
+
+
+
+
+							
+							
+                            <script id="django-admin-form-add-constants" src="./change_form.js" data-model-name="plantilla" async></script>
+                            <script id="django-admin-prepopulated-fields-constants" src="./prepopulate_init.js" data-prepopulated-fields="[]"></script>
+                        </div>
+                    </form>
+                </div>
+                <br class="clear">
+            </div>
+            <!-- END Content -->
+            <div id="footer"></div>
+        </main>
+    </div>
+</div>
+<!-- END Container -->
+<!-- SVGs -->
+<!-- END SVGs -->
+</body>
+</html>

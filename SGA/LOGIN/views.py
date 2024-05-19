@@ -10,3 +10,8 @@ def crea_user_view(request):
     }
     return render(request, 'crear_usuario.html', context)
 
+def crea_plantilla_view(request):
+    context = {
+        'MENSAJE': 'CREAR AUDITOR',      
+    }
+    return render(request, 'crear_plantilla.html',context)
