@@ -25,6 +25,7 @@ class Plantilla(models.Model):
         return self.nombre_plantilla
 
 class Formulario(models.Model):
+    id_actividad = models.AutoField(primary_key=True)
     plantilla = models.ForeignKey(Plantilla, on_delete=models.CASCADE)
     actividad = models.CharField(max_length=1200)
 
@@ -42,9 +43,35 @@ class AgendaAuditorias(models.Model):
     fecha_fin = models.DateTimeField()
     duracion_dia = models.IntegerField()
     area_departamento = models.CharField(max_length=255)
-    auditor = models.CharField(max_length=255)
+    auditor = models.ForeignKey(USERS, on_delete=models.CASCADE)
     fk_plantilla = models.ForeignKey(Plantilla, on_delete=models.CASCADE)
     objetivo = models.CharField(max_length=1000)
 
     def __str__(self):
         return f"Agenda de Auditorías para {self.nombre_entidad}"
+
+class Auditoria(models.Model):
+    id_auditar = models.AutoField(primary_key=True)
+    agenda_auditorias = models.ForeignKey(AgendaAuditorias, on_delete=models.CASCADE)
+    fecha_inicio_auditoria = models.DateTimeField()
+    fecha_fin_auditoria = models.DateTimeField()
+    fecha_inicio_plazo = models.DateTimeField()
+    estado_auditoria = models.CharField(max_length=10, choices=[("APROBADA", "Aprobada"), ("REPROBADA", "Reprobada"),("EVALUANDO", "Evaluando")])
+    observacion = models.TextField(blank=True, null=True)
+    fecha_fin_plazo = models.DateTimeField(blank=True, null=True)
+    fecha_cierre_auditoria = models.DateTimeField(blank=True, null=True)
+
+    def __str__(self):
+        return f"Auditar ID: {self.id_auditar} - Estado: {self.estado_auditoria} - Inicio: {self.fecha_inicio_auditoria.strftime('%Y-%m-%d')} - Fin: {self.fecha_fin_auditoria.strftime('%Y-%m-%d')}"
+
+class EvaluacionActividad(models.Model):
+    id = models.AutoField(primary_key=True)
+    id_actividad = models.ForeignKey(Formulario, on_delete=models.CASCADE)
+    auditoria_id = models.ForeignKey(Auditoria, on_delete=models.CASCADE)
+    respuesta = models.CharField(max_length=10, choices=[("APROBADA", "Aprobada"), ("REPROBADA", "Reprobada")])
+    observaciones = models.CharField(max_length=1000)
+    plazo_ini_observacion = models.DateTimeField()
+    plazo_fin_observacion = models.DateTimeField()
+
+    def __str__(self):
+        return f"Evaluación {self.id} - Actividad: {self.id_actividad.actividad} - Auditoría: {self.auditoria_id.id_auditar}"

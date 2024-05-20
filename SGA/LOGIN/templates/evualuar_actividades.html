@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+<title>Evalua actividades</title>
+<link rel="stylesheet" href="/static/admin/css/base.css">
+
+  <link rel="stylesheet" href="/static/admin/css/dark_mode.css">
+  <script src="/static/admin/js/theme.js" defer></script>
+
+
+  <link rel="stylesheet" href="/static/admin/css/nav_sidebar.css">
+  <script src="/static/admin/js/nav_sidebar.js" defer></script>
+
+<link rel="stylesheet" href="/static/admin/css/forms.css">
+
+
+<script src="/admin/jsi18n/"></script>
+<script src="/static/admin/js/vendor/jquery/jquery.js"></script>
+<script src="/static/admin/js/calendar.js"></script>
+<script src="/static/admin/js/jquery.init.js"></script>
+<script src="/static/admin/js/admin/DateTimeShortcuts.js"></script>
+<script src="/static/admin/js/core.js"></script>
+<script src="/static/admin/js/admin/RelatedObjectLookups.js"></script>
+<script src="/static/admin/js/actions.js"></script>
+<script src="/static/admin/js/urlify.js"></script>
+<script src="/static/admin/js/prepopulate.js"></script>
+<script src="/static/admin/js/vendor/xregexp/xregexp.js"></script>
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/admin/css/responsive.css">
+    
+
+<meta name="robots" content="NONE,NOARCHIVE">
+</head>
+
+<body class=" app-LOGIN model-evaluacionactividad change-form"
+  data-admin-utc-offset="0">
+<a href="#content-start" class="skip-to-content-link">Skip to main content</a>
+<!-- Container -->
+<div id="container">
+
+    
+    <!-- Header -->
+    
+      <header id="header">
+        <div id="branding">
+        
+<div id="site-name"><a href="/admin/">Django administration</a></div>
+
+
+        </div>
+        
+        
+        <div id="user-tools">
+            
+                Welcome,
+                <strong>USER</strong>.
+            
+
+                
+                <form id="logout-form" method="post" action="/admin/logout/">
+                    <input type="hidden" name="csrfmiddlewaretoken" value="IzB6GzAUqOhV34xbTuCMQGN7YYgQz5TVkBaLhtW5X6erV4VIeT4ajIM0yW9SToJ0">
+                    <button type="submit">Log out</button>
+                </form>
+                
+<button class="theme-toggle">
+  <div class="visually-hidden theme-label-when-auto">Toggle theme (current theme: auto)</div>
+  <div class="visually-hidden theme-label-when-light">Toggle theme (current theme: light)</div>
+  <div class="visually-hidden theme-label-when-dark">Toggle theme (current theme: dark)</div>
+  <svg aria-hidden="true" class="theme-icon-when-auto">
+    <use xlink:href="#icon-auto" />
+  </svg>
+  <svg aria-hidden="true" class="theme-icon-when-dark">
+    <use xlink:href="#icon-moon" />
+  </svg>
+  <svg aria-hidden="true" class="theme-icon-when-light">
+    <use xlink:href="#icon-sun" />
+  </svg>
+</button>
+
+            
+        </div>
+        
+        
+        
+      </header>
+    
+    <!-- END Header -->
+    
+      <nav aria-label="Breadcrumbs">
+        
+      </nav>
+    
+    
+
+    <div class="main" id="main">
+      
+        
+          
+<button class="sticky toggle-nav-sidebar" id="toggle-nav-sidebar" aria-label="Toggle navigation"></button>
+<nav class="sticky" id="nav-sidebar" aria-label="Sidebar">
+  <input type="search" id="nav-filter"
+         placeholder="Start typing to filter…"
+         aria-label="Filter navigation items">
+  
+
+
+  
+  
+  
+
+
+</nav>
+
+        
+      
+      <main id="content-start" class="content" tabindex="-1">
+        
+          
+        
+        <!-- Content -->
+        <div id="content" class="colM">
+          
+          <h1>Add evaluacion actividad</h1>
+          
+          <div id="content-main">
+
+
+
+<form method="post" id="evaluacionactividad_form" novalidate><input type="hidden" name="csrfmiddlewaretoken" value="IzB6GzAUqOhV34xbTuCMQGN7YYgQz5TVkBaLhtW5X6erV4VIeT4ajIM0yW9SToJ0">
+<div>
+
+
+
+
+
+
+
+  <fieldset class="module aligned ">
+    
+    
+    
+        <div class="form-row field-id_actividad">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label class="required" for="id_id_actividad">Id actividad:</label>
+                                
+                                    <div class="related-widget-wrapper" data-model-ref="formulario">
+    <select name="id_actividad" required id="id_id_actividad">
+  <option value="" selected>---------</option>
+
+</select>
+    
+        <a class="related-widget-wrapper-link change-related" id="change_id_id_actividad"
+            data-href-template="/admin/LOGIN/formulario/__fk__/change/?_to_field=id_actividad&amp;_popup=1"
+            data-popup="yes"
+            title="Change selected formulario"><img src="/static/admin/img/icon-changelink.svg" alt="" width="20" height="20"></a><a class="related-widget-wrapper-link add-related" id="add_id_id_actividad"
+            data-popup="yes"
+            href="/admin/LOGIN/formulario/add/?_to_field=id_actividad&amp;_popup=1"
+            title="Add another formulario"><img src="/static/admin/img/icon-addlink.svg" alt="" width="20" height="20"></a><a class="related-widget-wrapper-link view-related" id="view_id_id_actividad"
+             data-href-template="/admin/LOGIN/formulario/__fk__/change/?_to_field=id_actividad"
+             title="View selected formulario"><img src="/static/admin/img/icon-viewlink.svg" alt="" width="20" height="20"></a>
+    
+</div>
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+        <div class="form-row field-auditoria_id">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label class="required" for="id_auditoria_id">Auditoria id:</label>
+                                
+                                    <div class="related-widget-wrapper" data-model-ref="auditoria">
+    <select name="auditoria_id" required id="id_auditoria_id">
+  <option value="" selected>---------</option>
+
+</select>
+    
+        <a class="related-widget-wrapper-link change-related" id="change_id_auditoria_id"
+            data-href-template="/admin/LOGIN/auditoria/__fk__/change/?_to_field=id_auditar&amp;_popup=1"
+            data-popup="yes"
+            title="Change selected auditoria"><img src="/static/admin/img/icon-changelink.svg" alt="" width="20" height="20"></a><a class="related-widget-wrapper-link add-related" id="add_id_auditoria_id"
+            data-popup="yes"
+            href="/admin/LOGIN/auditoria/add/?_to_field=id_auditar&amp;_popup=1"
+            title="Add another auditoria"><img src="/static/admin/img/icon-addlink.svg" alt="" width="20" height="20"></a><a class="related-widget-wrapper-link view-related" id="view_id_auditoria_id"
+             data-href-template="/admin/LOGIN/auditoria/__fk__/change/?_to_field=id_auditar"
+             title="View selected auditoria"><img src="/static/admin/img/icon-viewlink.svg" alt="" width="20" height="20"></a>
+    
+</div>
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+        <div class="form-row field-respuesta">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label class="required" for="id_respuesta">Respuesta:</label>
+                                
+                                    <select name="respuesta" required id="id_respuesta">
+  <option value="" selected>---------</option>
+
+  <option value="APROBADA">Aprobada</option>
+
+  <option value="REPROBADA">Reprobada</option>
+
+</select>
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+        <div class="form-row field-observaciones">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label class="required" for="id_observaciones">Observaciones:</label>
+                                
+                                    <input type="text" name="observaciones" class="vTextField" maxlength="1000" required id="id_observaciones">
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+        <div class="form-row field-plazo_ini_observacion">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label class="required">Plazo ini observacion:</label>
+                                
+                                    <p class="datetime">
+  Date: <input type="text" name="plazo_ini_observacion_0" class="vDateField" size="10" required id="id_plazo_ini_observacion_0">
+
+<br>
+  Time: <input type="text" name="plazo_ini_observacion_1" class="vTimeField" size="8" required id="id_plazo_ini_observacion_1">
+
+
+</p>
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+        <div class="form-row field-plazo_fin_observacion">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label class="required">Plazo fin observacion:</label>
+                                
+                                    <p class="datetime">
+  Date: <input type="text" name="plazo_fin_observacion_0" class="vDateField" size="10" required id="id_plazo_fin_observacion_0">
+
+<br>
+  Time: <input type="text" name="plazo_fin_observacion_1" class="vTimeField" size="8" required id="id_plazo_fin_observacion_1">
+
+
+</p>
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+</fieldset>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="submit-row">
+
+<input type="submit" value="GUARDAR" class="default" name="_save">
+
+<input type="submit" value="GUARDAR Y AGREGAR OTRO" name="_addanother">
+<input type="submit" value="GUARDAR Y CONTINUAR EDITANDO" name="_continue">
+
+
+
+</div>
+
+
+
+    <script id="django-admin-form-add-constants"
+            src="/static/admin/js/change_form.js"
+            
+                data-model-name="evaluacionactividad"
+            
+            async>
+    </script>
+
+
+
+
+<script id="django-admin-prepopulated-fields-constants"
+        src="/static/admin/js/prepopulate_init.js"
+        data-prepopulated-fields="[]">
+</script>
+
+
+</div>
+</form></div>
+
+          
+          <br class="clear">
+        </div>
+        <!-- END Content -->
+        <div id="footer"></div>
+      </main>
+    </div>
+</div>
+<!-- END Container -->
+
+<!-- SVGs -->
+<svg xmlns="http://www.w3.org/2000/svg" class="base-svgs">
+  <symbol viewBox="0 0 24 24" width="1rem" height="1rem" id="icon-auto"><path d="M0 0h24v24H0z" fill="currentColor"/><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2V4a8 8 0 1 0 0 16z"/></symbol>
+  <symbol viewBox="0 0 24 24" width="1rem" height="1rem" id="icon-moon"><path d="M0 0h24v24H0z" fill="currentColor"/><path d="M10 7a7 7 0 0 0 12 4.9v.1c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2h.1A6.979 6.979 0 0 0 10 7zm-6 5a8 8 0 0 0 15.062 3.762A9 9 0 0 1 8.238 4.938 7.999 7.999 0 0 0 4 12z"/></symbol>
+  <symbol viewBox="0 0 24 24" width="1rem" height="1rem" id="icon-sun"><path d="M0 0h24v24H0z" fill="currentColor"/><path d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.515 4.929l1.414-1.414L7.05 5.636 5.636 7.05 3.515 4.93zM16.95 18.364l1.414-1.414 2.121 2.121-1.414 1.414-2.121-2.121zm2.121-14.85l1.414 1.415-2.121 2.121-1.414-1.414 2.121-2.121zM5.636 16.95l1.414 1.414-2.121 2.121-1.414-1.414 2.121-2.121zM23 11v2h-3v-2h3zM4 11v2H1v-2h3z"/></symbol>
+</svg>
+<!-- END SVGs -->
+</body>
+</html>

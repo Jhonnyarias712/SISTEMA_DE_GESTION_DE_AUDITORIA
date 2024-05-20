@@ -25,4 +25,6 @@ urlpatterns = [
     path('LOGIN/crear_usuario/', include('LOGIN.urls'),name='CREAR_USUARIO'),
     path('LOGIN/crear_plantilla/', include('LOGIN.urls'),name='CREAR_USUARIO'),
     path('LOGIN/agendar_auditoria/', include('LOGIN.urls'),name='AGENDAR_AUDITORIA'),
+    path('LOGIN/auditoria/', include('LOGIN.urls'),name='AUDITORIA'),
+    path('LOGIN/evalua_actividad/', include('LOGIN.urls'),name='EVALUA_ACTIVIDAD'),
 ]

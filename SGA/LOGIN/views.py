@@ -21,3 +21,17 @@ def agendar_auditoria_view(request):
         'MENSAJE': 'CREAR AUDITOR',      
     }
     return render(request, 'agendar_auditoria.html',context)
+
+
+def auditoria_view(request):
+    context = {
+        'MENSAJE': 'CREAR AUDITOR',      
+    }
+    return render(request, 'auditoria.html',context)
+
+
+def evalua_actividad_view(request):
+    context = {
+        'MENSAJE': 'CREAR AUDITOR',      
+    }
+    return render(request, 'evualuar_actividades.html',context)
