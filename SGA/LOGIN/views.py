@@ -35,3 +35,10 @@ def evalua_actividad_view(request):
         'MENSAJE': 'CREAR AUDITOR',      
     }
     return render(request, 'evualuar_actividades.html',context)
+
+
+def historial_auditorias_view(request):
+    context = {
+        'MENSAJE': 'CREAR AUDITOR',      
+    }
+    return render(request, 'historial_auditoria.html',context)

@@ -75,3 +75,20 @@ class EvaluacionActividad(models.Model):
 
     def __str__(self):
         return f"Evaluación {self.id} - Actividad: {self.id_actividad.actividad} - Auditoría: {self.auditoria_id.id_auditar}"
+    
+class HistorialAuditoria(models.Model):
+    id_historial = models.AutoField(primary_key=True)
+    auditoria = models.ForeignKey('Auditoria', on_delete=models.CASCADE)
+    fecha_inicio_auditoria = models.DateTimeField()
+    fecha_fin_auditoria = models.DateTimeField()
+    estado_auditoria = models.CharField(max_length=10, choices=[("APROBADA", "Aprobada"), ("REPROBADA", "Reprobada"), ("PENDIENTE", "Pendiente"), ("CANCELADA", "Cancelada")])
+    observaciones = models.TextField(blank=True, null=True)
+    auditor = models.ForeignKey('USERS', on_delete=models.CASCADE)
+    fk_plantilla = models.ForeignKey('Plantilla', on_delete=models.CASCADE)
+    documentos_adjuntos = models.FileField(upload_to='documentos/', blank=True, null=True)
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+    fecha_actualizacion = models.DateTimeField(auto_now=True)
+    evaluaciones_actividades = models.ForeignKey('EvaluacionActividad', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Historial de Auditoría para {self.auditoria}"

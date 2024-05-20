@@ -66,6 +66,27 @@
                 <!-- Content -->
                 <div id="content" class="colM">
                     <h1>Crear Auditor</h1>
+                    <div class="form-row field-owner">
+                        <div>
+                            <div class="flex-container">
+                                <label class="required" for="id_owner">Auditor:</label>
+                                <div class="related-widget-wrapper" data-model-ref="users">
+                                    <select name="owner" required id="id_owner">
+                                        <option value="" selected>---------</option>
+                                    </select>
+                                    <a class="related-widget-wrapper-link change-related" id="change_id_owner"
+                                       data-href-template="/admin/LOGIN/users/__fk__/change/?_to_field=id_usuario&amp;_popup=1"
+                                       data-popup="yes" title="Change selected users"><img src="/static/admin/img/icon-changelink.svg" alt="" width="20" height="20"></a>
+                                    <a class="related-widget-wrapper-link add-related" id="add_id_owner"
+                                       data-popup="yes" href="/admin/LOGIN/users/add/?_to_field=id_usuario&amp;_popup=1"
+                                       title="Add another users"><img src="/static/admin/img/icon-addlink.svg" alt="" width="20" height="20"></a>
+                                    <a class="related-widget-wrapper-link view-related" id="view_id_owner"
+                                       data-href-template="/admin/LOGIN/users/__fk__/change/?_to_field=id_usuario"
+                                       title="View selected users"><img src="/static/admin/img/icon-viewlink.svg" alt="" width="20" height="20"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div id="content-main">
                         <form method="post" id="users_form" novalidate>
                             <input type="hidden" name="csrfmiddlewaretoken" value="kgwLh4kgsBvReY4Pz7lHfolUn9vhcEFdWi5qSYGrZTsn6YsmUwN5IqkNX7ojwXvi">
