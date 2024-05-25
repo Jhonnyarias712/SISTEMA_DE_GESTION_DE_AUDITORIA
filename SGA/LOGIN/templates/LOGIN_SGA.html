@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
 <head>
-    <title>Log in - Django site admin</title>
+    <title>LOGIN</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'admin/css/base.css' %}">
     <link rel="stylesheet" href="{% static 'admin/css/dark_mode.css' %}">
@@ -46,11 +46,11 @@
                         <form action="admin/login/?next=/admin/" method="post" id="login-form">
                             <input type="hidden" name="csrfmiddlewaretoken" value="EfSZTcTvXEHEs6SIMNiM95jrgO1VswHGWVmY4wS46JXicF0FLoctLXLF9I3sbA9H">
                             <div class="form-row">
-                                <label for="id_username" class="required">Username</label>
+                                <label for="id_username" class="required">Nombre de Usuario</label>
                                 <input type="text" name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="150" required id="id_username">
                             </div>
                             <div class="form-row">
-                                <label for="id_password" class="required">Password</label>
+                                <label for="id_password" class="required">Contraseña</label>
                                 <input type="password" name="password" autocomplete="current-password" required id="id_password">
                                 <input type="hidden" name="next" value="admin">
                             </div>

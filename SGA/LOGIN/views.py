@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
-def auditoria_view(request):
+def login_view(request):
     return render(request, 'LOGIN_SGA.html')
 
 def crea_user_view(request):
@@ -42,3 +42,10 @@ def historial_auditorias_view(request):
         'MENSAJE': 'CREAR AUDITOR',      
     }
     return render(request, 'historial_auditoria.html',context)
+
+
+def home_view(request):
+    context = {
+        'MENSAJE': 'CREAR AUDITOR',      
+    }
+    return render(request, 'home_auditor.html',context)
