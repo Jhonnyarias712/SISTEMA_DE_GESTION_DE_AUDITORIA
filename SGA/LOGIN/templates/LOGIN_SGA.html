@@ -12,8 +12,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'admin/css/responsive.css' %}">
     <meta name="robots" content="NONE,NOARCHIVE">
+    <style>
+        .background-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            min-width: 100%;
+            min-height: 100%;
+            z-index: -1;
+            opacity: 0.2;
+        }
+        .main {
+            position: relative;
+            z-index: 1;
+        }
+    </style>
 </head>
 <body class="login" data-admin-utc-offset="0">
+    <video autoplay muted loop id="background-video" class="background-video">
+        <source src="{% static 'videos/VIDEOLOGINSGA.mp4' %}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
     <a href="#content-start" class="skip-to-content-link">Skip to main content</a>
     <!-- Container -->
     <div id="container">

@@ -15,6 +15,13 @@
     <link rel="stylesheet" href="{% static 'admin/css/forms.css' %}">
     <link rel="stylesheet" href="{% static 'admin/css/responsive.css' %}">
 
+    <style>
+        .logo-small {
+          width: 50px; /* Cambia este valor según el tamaño deseado */
+          height: auto; /* Para mantener la proporción */
+          padding-right: 30px;
+        }
+    </style>
    
 </head>
 <body class="app-LOGIN model-users change-form" data-admin-utc-offset="0">
@@ -25,7 +32,9 @@
         <!-- Header -->
         <header id="header">
             <div id="branding">
-                <div id="site-name"><a href="/admin/">SISTEMA DE GESTION DE AUDITORIA</a></div>
+                <div id="site-name">
+                    <img src="/static/imagen/logosga.png" alt="Logo SGA" class="logo-small">
+                    <a href="/admin/">SISTEMA DE GESTION DE AUDITORIA</a></div>
             </div>
             <div id="user-tools">
                 <span>Welcome, <strong>USER</strong>.</span>

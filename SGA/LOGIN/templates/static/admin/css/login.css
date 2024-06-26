@@ -29,9 +29,9 @@
     border: 1px solid var(--hairline-color);
     border-radius: 4px;
     overflow: hidden;
-    width: 28em;
-    min-width: 300px;
-    margin: 100px auto;
+    width: 500em;
+    min-width: 40px;
+    margin: 50px auto;
     height: auto;
 }
 
