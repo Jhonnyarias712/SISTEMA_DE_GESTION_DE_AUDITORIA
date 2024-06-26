@@ -1,12 +1,14 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import USERS
 
 def login_view(request):
     return render(request, 'LOGIN_SGA.html')
 
 def crea_user_view(request):
+    User = USERS.objects.all()
     context = {
-        'MENSAJE': 'CREAR AUDITOR',      
+        'USERS':User,      
     }
     return render(request, 'crear_usuario.html', context)
 
