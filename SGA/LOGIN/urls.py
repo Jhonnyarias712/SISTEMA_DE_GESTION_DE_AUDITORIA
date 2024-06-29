@@ -8,6 +8,9 @@ from .views import evalua_actividad_view
 from .views import historial_auditorias_view
 from .views import login_view
 from .views import home_view
+from .views import guardar_usuario
+from .views import guardar_usuario_2
+
 
 urlpatterns = [
     path('', login_view, name='LOGIN'),
@@ -18,5 +21,7 @@ urlpatterns = [
     path('evalua_actividad/', evalua_actividad_view, name='EVALUA_ACTIVIDAD'),
     path('historial/', historial_auditorias_view, name='HISTORIAL'),
     path('home/', home_view, name='HOME'),
+    path('guardar_usuario/', guardar_usuario, name='guardar_usuario'),
+    path('guardar_usuario/', guardar_usuario_2, name='guardar_usuario_2'),
     
 ]

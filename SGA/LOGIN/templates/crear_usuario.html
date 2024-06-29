@@ -15,15 +15,7 @@
 <link rel="stylesheet" href="/static/admin/css/forms.css">
 
 
-<script src="/admin/jsi18n/"></script>
-<script src="/static/admin/js/vendor/jquery/jquery.js"></script>
-<script src="/static/admin/js/jquery.init.js"></script>
-<script src="/static/admin/js/core.js"></script>
-<script src="/static/admin/js/admin/RelatedObjectLookups.js"></script>
-<script src="/static/admin/js/actions.js"></script>
-<script src="/static/admin/js/urlify.js"></script>
-<script src="/static/admin/js/prepopulate.js"></script>
-<script src="/static/admin/js/vendor/xregexp/xregexp.js"></script>
+
 
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -129,7 +121,7 @@
             <div>
                 <!-- DIV MALDITO XD
                 <div class="flex-container">-->
-                <label class="required" for="id_owner">Auditor:</label>
+                
                 <br>
                 
                 {% block content %}
@@ -143,9 +135,12 @@
                         
                 <!-- FIN DIV MALDITO XD-->
 
-                <div class="related-widget-wrapper" data-model-ref="users">
-                    <select name="owner" required id="id_owner">
+                <div class="related-widget-wrapper" data-model-ref="USERS">
+                    <select name="owner" required id="id_usuario">
                         <option value="" selected>---------</option>
+                        {% for usuario in USERS %}
+                            <option value="{{ usuario.id }}">{{ usuario.full_name }}</option>
+                        {% endfor %}
                     </select>
                     <a class="related-widget-wrapper-link change-related" id="change_id_owner"
                        data-href-template="/admin/LOGIN/users/__fk__/change/?_to_field=id_usuario&amp;_popup=1"
@@ -169,157 +164,71 @@
 
 
 
-  <fieldset class="module aligned ">
+<fieldset class="module aligned ">
+    <form method="POST" action="{% url 'guardar_usuario' %}>{% csrf_token %}
+        <div class="form-group">    
+            <div>
+                <label for="id_usuario">Usuario:</label>
+                <input type="text" id="id_usuario" name="usuario" required><br><br>
+            </div>
     
+            <div>
+                <label for="id_password">Contraseña:</label>
+                <input type="password" id="id_password" name="password" required><br><br>
+            </div>
     
+            <div>
+                <label for="id_full_name">Nombre Completo:</label>
+                <input type="text" id="id_full_name" name="full_name" required><br><br>
+            </div>
     
-        <div class="form-row field-usuario">
-            
-            
-                <div>
-                    
-                        <div class="flex-container">
-                            
-                                <label class="required" for="id_usuario">Usuario:</label>
-                                
-                                    <input type="text" name="usuario" class="vTextField" maxlength="100" required id="id_usuario">
-                                
-                            
-                        </div>
-                    
-                </div>
-            
-            
+            <div>
+                <label for="id_tipo_usuario">Tipo de Usuario:</label>
+                <input type="text" id="id_tipo_usuario" name="tipo_usuario" required><br><br>
+            </div>
+    
+            <div>
+                <label for="id_estado">Estado:</label>
+                <input type="text" id="id_estado" name="estado" required><br><br>
+            </div>
+        </div>       
+        
+        <div>
+            <input type="submit" value="guardar_usuario" class="default" name="guardar_usuario">
         </div>
-    
-        <div class="form-row field-password">
-            
-            
-                <div>
-                    
-                        <div class="flex-container">
-                            
-                                <label class="required" for="id_password">Password:</label>
-                                
-                                    <input type="text" name="password" class="vTextField" maxlength="100" required id="id_password">
-                                
-                            
-                        </div>
-                    
-                </div>
-            
-            
-        </div>
-    
-        <div class="form-row field-full_name">
-            
-            
-                <div>
-                    
-                        <div class="flex-container">
-                            
-                                <label class="required" for="id_full_name">Full name:</label>
-                                
-                                    <input type="text" name="full_name" class="vTextField" maxlength="255" required id="id_full_name">
-                                
-                            
-                        </div>
-                    
-                </div>
-            
-            
-        </div>
-    
-        <div class="form-row field-tipo_usuario">
-            
-            
-                <div>
-                    
-                    <div class="flex-container">
-                        <label class="required" for="id_tipo_usuario">Tipo usuario:</label>
-                        <input type="text" name="tipo_usuario" class="vTextField" maxlength="100" required id="id_tipo_usuario" list="tipo_usuario_list">
-                        <datalist id="tipo_usuario_list">
-                            <option value="ADMIN">
-                            <option value="AUDITOR">
-                        </datalist>
-                    </div>
-                    
-                </div>
-            
-            
-        </div>
-    
-        <div class="form-row field-estado">
-            
-            
-                <div>
-                    
-                        <div class="flex-container">
-                            
-                                <label class="required" for="id_estado">Estado:</label>
-                                
-                                    <input type="text" name="estado" class="vTextField" maxlength="1" required id="id_estado">
-                                
-                            
-                        </div>
-                    
-                </div>
-            
-            
-        </div>
+    </form>
+
+    <h2>Usuarios existentes:</h2>
+    <ul>
+        {% for user in USERS %}
+        <li>{{ user.full_name }} ({{ user.usuario }})</li>
+        {% endfor %}
+    </ul>
+
+</body>
+
     
 </fieldset>
 
 
-
-
-
-
-
-
-
-
-
-
-
-<div class="submit-row">
-
-<input type="submit" value="Save" class="default" name="_save">
-
-<input type="submit" value="Save and add another" name="_addanother">
-<input type="submit" value="Save and continue editing" name="_continue">
-
-
-
 </div>
 
 
 
-    <script id="django-admin-form-add-constants"
-            src="/static/admin/js/change_form.js"
-            
-                data-model-name="users"
-            
-            async>
-    </script>
+  
 
 
 
 
-<script id="django-admin-prepopulated-fields-constants"
-        src="/static/admin/js/prepopulate_init.js"
-        data-prepopulated-fields="[]">
-</script>
 
 
 </div>
-</form></div>
-
-          
-          <br class="clear">
-        </div>
-        <!-- END Content -->
-        <div id="footer"></div>
+</form>
+    </div>
+        <br class="clear">
+            </div>
+            <!-- END Content -->
+            <div id="footer"></div>
       </main>
     </div>
 </div>

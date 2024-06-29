@@ -1,0 +1,51 @@
+<!-- crear_usuario.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear Usuario</title>
+</head>
+<body>
+    <h1> Ver Auditores:</h1>
+    <select name="owner" required id="id_usuario">
+        <option value="" selected>---------</option>
+        {% for usuario in USERS %}
+            <option value="{{ usuario.id }}">{{ usuario.full_name }}</option>
+        {% endfor %}
+    </select>
+
+    <h1>Crear Nuevo Usuario</h1>
+    <form method="post" action="{% url 'guardar_usuario' %}">
+        {% csrf_token %}
+        
+        <div>
+            <label for="id_usuario">Usuario:</label>
+            <input type="text" id="id_usuario" name="usuario" required><br><br>
+        </div>
+
+        <div>
+            <label for="id_password">Contraseña:</label>
+            <input type="password" id="id_password" name="password" required><br><br>
+        </div>
+
+        <div>
+            <label for="id_full_name">Nombre Completo:</label>
+            <input type="text" id="id_full_name" name="full_name" required><br><br>
+        </div>
+
+        <div>
+            <label for="id_tipo_usuario">Tipo de Usuario:</label>
+            <input type="text" id="id_tipo_usuario" name="tipo_usuario" required><br><br>
+        </div>
+
+        <div>
+            <label for="id_estado">Estado:</label>
+            <input type="text" id="id_estado" name="estado" required><br><br>
+        </div>
+
+        <div>
+            <input type="submit" value="Guardar Usuario" class="default" name="_save">
+        </div>
+    </form>
+</body>
+</html>
