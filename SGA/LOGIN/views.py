@@ -1,9 +1,21 @@
 from django.shortcuts import render,redirect
+from django.contrib import messages
 from django.http import HttpResponse
 from .models import USERS
 
 def login_view(request):
-    return render(request, 'LOGIN_SGA.html')
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+
+        try:
+            user = USERS.objects.get(usuario=username, password=password)
+            return redirect(home_view)
+        except USERS.DoesNotExist:
+            messages.error(request, 'Credenciales incorrectas')
+            return render(request, 'LOGIN_SGA.html')
+    else:
+        return render(request, 'LOGIN_SGA.html')
 
 def crea_user_view(request):
     User = USERS.objects.all()
