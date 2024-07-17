@@ -2,6 +2,9 @@ from django.shortcuts import get_object_or_404, render,redirect
 from django.contrib import messages
 from django.http import HttpResponse
 from .models import USERS
+import json
+from django.core.serializers.json import DjangoJSONEncoder  # Importa el encoder de Django para manejar datetime
+
 
 
 
@@ -21,6 +24,8 @@ def login_view(request):
 
 def crea_user_view(request):
     User = USERS.objects.all()
+    
+
     context = {
         'USERS':User,      
     }
@@ -49,10 +54,8 @@ def delete_user(request):
 
 def guardar_usuario(request):
     if request.method == 'POST':
-        if '_get' in request.POST:
-            return redirect('guardar_usuario') 
-
-        elif '_delete' in request.POST:
+        
+        if '_delete' in request.POST:
             print('Entra al seccion eliminar')
             usuario_id = request.POST.get('usuario_cb')
             print(f'ENCONTRADO: {usuario_id}')
@@ -79,12 +82,32 @@ def guardar_usuario(request):
     
     # Obtener todos los usuarios para mostrar en la página
     users = USERS.objects.all()
+    users_json = serialize_users_to_json(users)
     context = {
         'USERS': users,
+        'USERS_JSON': users_json,
     }
 
     return render(request, 'guardar_usuario.html', context)
 
+def serialize_users_to_json(users_queryset):
+    users_list = list(users_queryset.values(
+        'id_usuario',
+        'usuario',
+        'password',
+        'full_name',
+        'tipo_usuario',
+        'fecha_creacion',
+        'fecha_actualizacion',
+        'estado'
+    ))  # Convertir queryset a lista de diccionarios
+    
+    # Formatear los campos datetime a cadenas
+    for user in users_list:
+        user['fecha_creacion'] = user['fecha_creacion'].strftime('%Y-%m-%d %H:%M:%S')
+        user['fecha_actualizacion'] = user['fecha_actualizacion'].strftime('%Y-%m-%d %H:%M:%S')
+    
+    return json.dumps(users_list, cls=DjangoJSONEncoder)
 
 def guardar_usuario_2(request):
     if request.method == 'POST':
