@@ -12,6 +12,7 @@ from .views import guardar_usuario
 from .views import guardar_usuario_2
 
 
+
 urlpatterns = [
     path('', login_view, name='LOGIN'),
     path('crear_usuario/', crea_user_view, name='CREAR_USUARIO'),

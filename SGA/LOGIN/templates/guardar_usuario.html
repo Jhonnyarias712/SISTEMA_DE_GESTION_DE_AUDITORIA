@@ -12,11 +12,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/admin/css/responsive.css">
     <meta name="robots" content="NONE,NOARCHIVE">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         .logo-small {
             width: 50px;
             height: auto;
             padding-right: 30px;
+        }
+        button.edit-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button.edit-btn:hover {
+            background-color: #0056b3;
+        }
+
+        button.edit-btn i {
+            margin-right: 8px;
         }
     </style>
 </head>
@@ -65,12 +86,20 @@
                     <h1>AGREGAR AUDITORES/ADMIN</h1>
                     <div id="content-main">
                         <h1>Ver Auditores:</h1>
-                        <select name="owner" required id="id_usuario">
-                            <option value="" selected>---------</option>
-                            {% for usuario in USERS %}
-                                <option value="{{ usuario.id }}">{{ usuario.full_name }}</option>
-                            {% endfor %}
-                        </select>
+                        <form method="post" action="{% url 'guardar_usuario' %}">
+                            {% csrf_token %}
+                            <div>
+                                <select name="usuario_cb" required id="id_usuario">
+                                    <option value="" selected>---------</option>
+                                    {% for usuario in USERS %}
+                                        <option value="{{ usuario.id_usuario }}">{{ usuario.full_name }}</option>
+                                    {% endfor %}
+                                </select>
+                                <input type="submit" value="✎ Editar" class="default" name="_get">
+                                <input type="submit" value="✘ Eliminar" class="default" name="_delete">
+                            </div>
+                        </form>
+
                         <h1>Crear Nuevo Usuario</h1>
                         <form method="post" action="{% url 'guardar_usuario' %}">
                             {% csrf_token %}
@@ -96,7 +125,7 @@
                             </div>
                             <div>
                                 <input type="submit" value="Guardar Usuario" class="default" name="_save">
-                            </div>
+                            </div>                            
                         </form>
                     </div>
                     <br class="clear">
