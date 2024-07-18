@@ -54,6 +54,12 @@ def delete_user(request):
 
 def guardar_usuario(request):
     if request.method == 'POST':
+
+        usuario = request.POST.get('usuario')
+        password = request.POST.get('password')
+        full_name = request.POST.get('full_name')
+        tipo_usuario = request.POST.get('tipo_usuario')
+        estado = request.POST.get('estado')
         
         if '_delete' in request.POST:
             print('Entra al seccion eliminar')
@@ -64,21 +70,36 @@ def guardar_usuario(request):
             return redirect('guardar_usuario') 
                 
         elif '_save' in request.POST:
-            print('Entra al if del boton')
-            usuario = request.POST.get('usuario')
-            password = request.POST.get('password')
-            full_name = request.POST.get('full_name')
-            tipo_usuario = request.POST.get('tipo_usuario')
-            estado = request.POST.get('estado')
-            new_user = USERS(usuario=usuario, password=password, full_name=full_name,
-                            tipo_usuario=tipo_usuario, estado=estado)
-            #new_user = USERS.objects.create(usuario=usuario, password=password, full_name=full_name,
-            #                 tipo_usuario=tipo_usuario, estado=estado)
-            
-            new_user.save()
+            print('Entra al if del boton GUARDAR')
+            usuario_id = request.POST.get('pk_usuario')
+            print(f'usuario_cb: {usuario_id}')
+            if usuario_id is not None and str(usuario_id).strip():
+                print('Encontrol algo')
+                print('Actualizando...')
+                user_to_save = get_object_or_404(USERS, id_usuario=usuario_id)
+                user_to_save.usuario = usuario
+                user_to_save.password = password
+                user_to_save.full_name = full_name
+                user_to_save.tipo_usuario = tipo_usuario
+                user_to_save.estado = estado
+                user_to_save.save()
+                #return redirect('guardar_usuario')
+            else:
+                usuario = request.POST.get('usuario')
+                password = request.POST.get('password')
+                full_name = request.POST.get('full_name')
+                tipo_usuario = request.POST.get('tipo_usuario')
+                estado = request.POST.get('estado')
+                print('No encontrado procede a crear el usuario')
+                user_to_save = None
+                new_user = USERS(usuario=usuario, password=password, full_name=full_name,
+                                tipo_usuario=tipo_usuario, estado=estado
+                )
+                new_user.save()
+                print (new_user.full_name)           
+               # return redirect('guardar_usuario')
 
 
-            return redirect('guardar_usuario') 
     
     # Obtener todos los usuarios para mostrar en la página
     users = USERS.objects.all()
@@ -112,6 +133,7 @@ def serialize_users_to_json(users_queryset):
 def guardar_usuario_2(request):
     if request.method == 'POST':
         if '_save' in request.POST:
+
             print(request.POST)  # Verifica qué datos se están enviando desde el formulario
             usuario = request.POST.get('usuario')
             password = request.POST.get('password')

@@ -19,15 +19,17 @@
             console.log('Entra al metodo actualizar_campos_form')
             var selectElement = document.getElementById("id_usuario_cb").value;
             console.log('OBTIENE CAMPO SELECCIONADO',selectElement)
-            var selectedUserId = selectElement.value; // Obtener el ID del usuario seleccionado
-            
+            var selectedUserId = selectElement; // Obtener el ID del usuario seleccionado
+            console.log('Cambio variable:',selectElement)
+            console.log('selectedUserId:',selectedUserId)
             // Obtener los datos del usuario seleccionado (puedes hacer una llamada AJAX aquí)
             var usuarioSeleccionado = obtenerDatosUsuario(selectedUserId);
-            
+            console.log('usuarioSeleccionado:',usuarioSeleccionado)
             // Verificar en la consola si se está obteniendo el usuario correctamente
-            console.log('Usuario seleccionado:', usuarioSeleccionado);
+            console.log('Usuario seleccionado:', usuarioSeleccionado.id_usuario);
             
             // Actualizar los campos del formulario con los datos del usuario seleccionado
+            document.getElementById("pk_usuario").value = usuarioSeleccionado.id_usuario;
             document.getElementById("id_usuario").value = usuarioSeleccionado.usuario;
             document.getElementById("id_password").value = usuarioSeleccionado.password;
             document.getElementById("id_full_name").value = usuarioSeleccionado.full_name;
@@ -39,12 +41,13 @@
         function obtenerDatosUsuario(usuarioId) {
         // Convertir la cadena JSON de usuarios en un objeto JavaScript
         var USERS = JSON.parse('{{ USERS_JSON | escapejs }}');
-
+        console.log('Entrada', usuarioId);    
+        console.log('Json:', USERS);    
         // Encontrar el usuario por ID
         var usuarioEncontrado = USERS.find(function(usuario) {
-            return usuario.id == usuarioId;
+                        return usuario.id_usuario == usuarioId;
         });
-
+        //console.log('Usuario NO ENCONTRADO:', usuarioEncontrado);
         return usuarioEncontrado;
         }
 
@@ -152,6 +155,8 @@
                         <h1>Crear Nuevo Usuario</h1>
                         <form method="post" action="{% url 'guardar_usuario' %}">
                             {% csrf_token %}
+                            
+                            <input type="text" id="pk_usuario" name="pk_usuario" style="visibility: hidden;">
                             <div>
                                 <label for="id_usuario">Usuario:</label>
                                 <input type="text" id="id_usuario" name="usuario" required><br><br>
