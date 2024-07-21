@@ -10,6 +10,8 @@ from .views import login_view
 from .views import home_view
 from .views import guardar_usuario
 from .views import guardar_usuario_2
+from .views import formulario_actividades
+
 
 
 
@@ -23,6 +25,8 @@ urlpatterns = [
     path('historial/', historial_auditorias_view, name='HISTORIAL'),
     path('home/', home_view, name='HOME'),
     path('guardar_usuario/', guardar_usuario, name='guardar_usuario'),
+    path('formulario_actividades/', formulario_actividades, name='formulario_actividades'),
     path('guardar_usuario/', guardar_usuario_2, name='guardar_usuario_2'),
+    
     
 ]

@@ -30,4 +30,5 @@ urlpatterns = [
     path('LOGIN/evalua_actividad/', include('LOGIN.urls'),name='EVALUA_ACTIVIDAD'),
     path('LOGIN/historial/', include('LOGIN.urls'),name='HISTORIAL'),
     path('LOGIN/home/', include('LOGIN.urls'),name='HOME'),
+    path('LOGIN/formulario_actividades/', include('LOGIN.urls'),name='formulario_actividades'),
 ]

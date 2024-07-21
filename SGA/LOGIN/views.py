@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404, render,redirect
 from django.contrib import messages
 from django.http import HttpResponse
-from .models import USERS,Plantilla
+from .models import USERS,Plantilla,Formulario
 import json
 from django.core.serializers.json import DjangoJSONEncoder  # Importa el encoder de Django para manejar datetime
 
@@ -211,6 +211,52 @@ def crea_plantilla_view(request):
     }
 
     return render(request, 'crear_plantilla.html', context)
+
+
+def formulario_actividades(request):
+    
+    #print(f"nombre_plantilla: {formulario}")
+    print("Entra actividades")
+
+    if request.method == 'POST':
+        print("Entra POST DELETE")
+        
+        if '_delete_act' in request.POST:
+            Formulario_cb = request.POST.get('formulario_cb')
+            print(f'ENCONTRADO: {Formulario_cb}')
+
+            formulario = get_object_or_404(Formulario, id_actividad=Formulario_cb) 
+            formulario.delete()
+            return redirect('formulario_actividades')
+
+        elif '_save_act' in request.POST:
+        
+            Plantilla_cb = request.POST.get('Plantilla_cb')
+            actividad = request.POST.get('actividad')
+            print(f'Plantilla_cb: {Plantilla_cb}')
+            print(f'actividad ENCONTRADO: {actividad}')
+
+            
+            Plantilla_encontrada = get_object_or_404(Plantilla, id_plantilla=Plantilla_cb) 
+            print(f'Plantilla_encontrada: {Plantilla_encontrada}')
+            
+            nueva_actividad_form = Formulario(
+                plantilla=Plantilla_encontrada,
+                actividad=actividad,
+            )
+            nueva_actividad_form.save()
+            
+
+    plantilla = Plantilla.objects.all()
+    formulario = Formulario.objects.all()
+
+    context = {
+        'Plantilla': plantilla,   
+        'Formulario'  :formulario,
+    }
+    return render(request, 'formulario_actividades.html',context)
+
+
 
 def agendar_auditoria_view(request):
     context = {
