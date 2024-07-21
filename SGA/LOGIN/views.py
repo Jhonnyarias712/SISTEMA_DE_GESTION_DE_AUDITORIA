@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404, render,redirect
 from django.contrib import messages
 from django.http import HttpResponse
-from .models import USERS
+from .models import USERS,Plantilla
 import json
 from django.core.serializers.json import DjangoJSONEncoder  # Importa el encoder de Django para manejar datetime
 
@@ -154,10 +154,63 @@ def guardar_usuario_2(request):
 
 
 def crea_plantilla_view(request):
+    usuario_id = request.POST.get('usuario_cb')
+    if request.method == 'POST':
+        #id_plantilla
+        nombre_plantilla = request.POST.get('nombre_plantilla')
+        tema = request.POST.get('tema')
+        
+        description = request.POST.get('description')
+        created_date = request.POST.get('created_date')
+
+        print(f"nombre_plantilla: {nombre_plantilla}")
+        print(f"tema: {tema}")
+        
+        print(f"description: {description}")
+        print(f"created_date: {created_date}")
+        
+        
+        if '_delete_plan' in request.POST:
+            print('Entra al seccion eliminar')
+            Plantilla_cb = request.POST.get('Plantilla_cb')
+            print(f'ENCONTRADO: {usuario_id}')
+            user_to_delete = get_object_or_404(Plantilla, id_plantilla=Plantilla_cb)
+            user_to_delete.delete()
+            return redirect('CREAR_PLANTILLA') #crea_plantilla_view
+            
+        elif '_save_plan' in request.POST:
+            print('Entra al if del boton GUARDAR')
+            user_to_owner = get_object_or_404(USERS, id_usuario=usuario_id)
+            owner = user_to_owner.id_usuario
+            print(f"owner: {owner}")           
+            nueva_plantilla = Plantilla(
+            nombre_plantilla=nombre_plantilla,
+            tema=tema,
+            owner=user_to_owner,
+            description=description,
+            created_date=created_date
+            )
+            # Guardar la nueva instancia en la base de datos
+            nueva_plantilla.save()
+            print('Guardado con exito')
+            print (nueva_plantilla.nombre_plantilla)           
+               # return redirect('guardar_usuario')
+        
+
+    
+    # Obtener todos los usuarios para mostrar en la página
+    plantilla = Plantilla.objects.all()
+    #plantilla_json = serialize_users_to_json(plantilla)
+    users = USERS.objects.all()
+    #users_json = serialize_users_to_json(users)
+    
     context = {
-        'MENSAJE': 'CREAR AUDITOR',      
+        'Plantilla': plantilla,
+        #'Plantilla_JSON': plantilla_json,
+        'USERS': users,
     }
-    return render(request, 'crear_plantilla.html',context)
+
+    return render(request, 'crear_plantilla.html', context)
 
 def agendar_auditoria_view(request):
     context = {
