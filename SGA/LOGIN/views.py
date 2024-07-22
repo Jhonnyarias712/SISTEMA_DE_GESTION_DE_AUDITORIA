@@ -1,11 +1,10 @@
 from django.shortcuts import get_object_or_404, render,redirect
 from django.contrib import messages
 from django.http import HttpResponse
-from .models import USERS,Plantilla,Formulario
+from .models import USERS,Plantilla,Formulario,AgendaAuditorias,Auditoria,EvaluacionActividad,Formulario
 import json
 from django.core.serializers.json import DjangoJSONEncoder  # Importa el encoder de Django para manejar datetime
-
-
+from .forms import AgendaAuditoriasForm, AuditoriaForm, AuditarForm, FormularioForm
 
 
 def login_view(request):
@@ -258,32 +257,141 @@ def formulario_actividades(request):
 
 
 
-def agendar_auditoria_view(request):
+def agendar_auditoria_view(request, pk=None):
+    if pk:
+        instance = get_object_or_404(AgendaAuditorias, pk=pk)
+    else:
+        instance = None
+
+    if request.method == 'POST':
+        form = AgendaAuditoriasForm(request.POST, instance=instance)
+        
+        if form.is_valid():
+            if '_delete' in request.POST:
+                instance.delete()
+                return redirect('AGENDAR_AUDITORIA')  # Redirige a la misma página después de eliminar
+            
+            instance = form.save()
+
+            if '_continue' in request.POST:
+                return redirect('AGENDAR_AUDITORIA_EDITAR', pk=instance.pk)
+            else:
+                return redirect('AGENDAR_AUDITORIA')  # Redirige a la misma página después de guardar
+    else:
+        form = AgendaAuditoriasForm(instance=instance)
+
+    # Obtener todas las auditorías
+    auditorias = AgendaAuditorias.objects.all()
+
+    # Añadir las auditorías al contexto
     context = {
-        'MENSAJE': 'CREAR AUDITOR',      
+        'form': form,
+        'auditorias': auditorias,
     }
-    return render(request, 'agendar_auditoria.html',context)
+    return render(request, 'agendar_auditoria.html', context)
 
 
-def auditoria_view(request):
+def auditoria_view(request, pk=None):
+    if pk:
+        instance = get_object_or_404(Auditoria, pk=pk)
+    else:
+        instance = None
+        
+    if request.method == 'POST':
+        form = AuditoriaForm(request.POST, instance=instance)
+        
+        if form.is_valid():
+            
+            instance = form.save()
+
+            if '_continue' in request.POST:
+                return redirect('AUDITORIA_EDITAR', pk=instance.pk)           
+            else:
+                return redirect('EVALUA_ACTIVIDAD')  # Redirige para auditar
+    else:
+        form = AuditoriaForm(instance=instance)
+    
     context = {
-        'MENSAJE': 'CREAR AUDITOR',      
+        'form': form,
+        'MENSAJE': 'CREAR AUDITOR',
     }
-    return render(request, 'auditoria.html',context)
+    return render(request, 'auditoria.html', context)
 
 
-def evalua_actividad_view(request):
+def evalua_actividad_view(request, pk=None):
+    if pk:
+        instance = get_object_or_404(EvaluacionActividad, pk=pk)
+    else:
+        instance = None
+
+    if request.method == 'POST':
+        form = AuditarForm(request.POST, instance=instance)
+        
+        if form.is_valid():
+            if '_delete' in request.POST:
+                instance.delete()
+                return redirect('EVALUA_ACTIVIDAD')
+            
+            instance = form.save()
+
+            if '_continue' in request.POST:
+                return redirect('EVALUA_ACTIVIDAD_EDITAR', pk=instance.pk)
+            else:
+                return redirect('EVALUA_ACTIVIDAD')
+    else:
+        form = AuditarForm(instance=instance)   
+
+    formulario_form = FormularioForm()  # Crear una instancia vacía del otro formulario
+
     context = {
-        'MENSAJE': 'CREAR AUDITOR',      
+        'form': form,
+        'formulario_form': formulario_form,  # Pasar el segundo formulario al contexto
+        'MENSAJE': 'EVALUAR ACTIVIDAD',
     }
-    return render(request, 'evualuar_actividades.html',context)
+    return render(request, 'evualuar_actividades.html', context)
+
+def formulario_view(request, pk=None):
+    if pk:
+        instance = get_object_or_404(Formulario, pk=pk)
+    else:
+        instance = None
+
+    if request.method == 'POST':
+        form = FormularioForm(request.POST, instance=instance)
+        
+        if form.is_valid():
+            if '_delete' in request.POST:
+                instance.delete()
+                return redirect('EVALUA_ACTIVIDAD')
+            
+            instance = form.save()
+
+            if '_continue' in request.POST:
+                return redirect('EVALUA_ACTIVIDAD_EDITAR', pk=instance.pk)
+            else:
+                return redirect('EVALUA_ACTIVIDAD')
+    else:
+        form = FormularioForm(instance=instance)   
+
+    # No es necesario crear un segundo formulario aquí
+    context = {
+        'form': form,
+        'MENSAJE': 'EVALUAR FORMULARIO',
+    }
+    return render(request, 'evualuar_actividades.html', context)
 
 
 def historial_auditorias_view(request):
+    # Ajusta los nombres de los campos según tus modelos
+    DATOS_AUDITORIA = AgendaAuditorias.objects.all()
+    INICIO_AUDITORIA = Auditoria.objects.all()
+    ESTADO = EvaluacionActividad.objects.all()
     context = {
-        'MENSAJE': 'CREAR AUDITOR',      
+        'DATOS_AUDITORIA': DATOS_AUDITORIA,
+        'INICIO_AUDITORIA': INICIO_AUDITORIA,
+        'ESTADO': ESTADO,
     }
-    return render(request, 'historial_auditoria.html',context)
+    return render(request, 'historial_auditoria.html', context)
 
 
 def home_view(request):

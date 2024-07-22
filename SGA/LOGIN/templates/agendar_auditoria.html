@@ -1,473 +1,128 @@
 <!DOCTYPE html>
 <html lang="en-us">
 <head>
-<title>Agendar auditorias</title>
-<link rel="stylesheet" href="/static/admin/css/base.css">
-
-  <link rel="stylesheet" href="/static/admin/css/dark_mode.css">
-  <script src="/static/admin/js/theme.js" defer></script>
-
-
-  <link rel="stylesheet" href="/static/admin/css/nav_sidebar.css">
-  <script src="/static/admin/js/nav_sidebar.js" defer></script>
-
-<link rel="stylesheet" href="/static/admin/css/forms.css">
-
-
-<script src="/admin/jsi18n/"></script>
-<script src="/static/admin/js/vendor/jquery/jquery.js"></script>
-<script src="/static/admin/js/calendar.js"></script>
-<script src="/static/admin/js/jquery.init.js"></script>
-<script src="/static/admin/js/admin/DateTimeShortcuts.js"></script>
-<script src="/static/admin/js/core.js"></script>
-<script src="/static/admin/js/admin/RelatedObjectLookups.js"></script>
-<script src="/static/admin/js/actions.js"></script>
-<script src="/static/admin/js/urlify.js"></script>
-<script src="/static/admin/js/prepopulate.js"></script>
-<script src="/static/admin/js/vendor/xregexp/xregexp.js"></script>
-
-
+    <title>Agendar auditorias</title>
+    <link rel="stylesheet" href="/static/admin/css/base.css">
+    <link rel="stylesheet" href="/static/admin/css/dark_mode.css">
+    <script src="/static/admin/js/theme.js" defer></script>
+    <link rel="stylesheet" href="/static/admin/css/nav_sidebar.css">
+    <script src="/static/admin/js/nav_sidebar.js" defer></script>
+    <link rel="stylesheet" href="/static/admin/css/forms.css">
+    <script src="/admin/jsi18n/"></script>
+    <script src="/static/admin/js/vendor/jquery/jquery.js"></script>
+    <script src="/static/admin/js/calendar.js"></script>
+    <script src="/static/admin/js/jquery.init.js"></script>
+    <script src="/static/admin/js/admin/DateTimeShortcuts.js"></script>
+    <script src="/static/admin/js/core.js"></script>
+    <script src="/static/admin/js/admin/RelatedObjectLookups.js"></script>
+    <script src="/static/admin/js/actions.js"></script>
+    <script src="/static/admin/js/urlify.js"></script>
+    <script src="/static/admin/js/prepopulate.js"></script>
+    <script src="/static/admin/js/vendor/xregexp/xregexp.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/admin/css/responsive.css">
-    
-
-<meta name="robots" content="NONE,NOARCHIVE">
-
-<style>
+    <meta name="robots" content="NONE,NOARCHIVE">
+    <style>
         .logo-small {
-          width: 50px; /* Cambia este valor según el tamaño deseado */
-          height: auto; /* Para mantener la proporción */
-          padding-right: 30px;
+            width: 50px;
+            height: auto;
+            padding-right: 30px;
         }
-</style>
-
+    </style>
 </head>
-
-<body class=" app-LOGIN model-agendaauditorias change-form"
-  data-admin-utc-offset="0">
-<a href="#content-start" class="skip-to-content-link">Skip to main content</a>
-<!-- Container -->
-<div id="container">
-
-    
-    <!-- Header -->
-    
-      <header id="header">
-        <div id="branding">
-        
-<div id="site-name">
-        <img src="/static/imagen/logosga.png" alt="Logo SGA" class="logo-small">
-        <a href="/admin/">SISTEMA DE GESTION DE AUDITORIA</a></div>
-
-
-        </div>
-        
-        
-        <div id="user-tools">
-            
-                Welcome,
-                <strong>USER</strong>.
-
+<body class="app-LOGIN model-agendaauditorias change-form" data-admin-utc-offset="0">
+    <a href="#content-start" class="skip-to-content-link">Skip to main content</a>
+    <div id="container">
+        <header id="header">
+            <div id="branding">
+                <div id="site-name">
+                    <img src="/static/imagen/logosga.png" alt="Logo SGA" class="logo-small">
+                    <a href="/admin/">SISTEMA DE GESTION DE AUDITORIA</a>
+                </div>
+            </div>
+            <div id="user-tools">
+                Welcome, <strong>USER</strong>.
                 <form id="logout-form" method="post" action="/admin/logout/">
                     <input type="hidden" name="csrfmiddlewaretoken" value="EClg8OSrdjMfdTOyFPC0aNslYCoGIOGcgEUVJIeCKBJL5Tc50e4oDPreyAhI27wh">
                     <button type="submit">Log out</button>
                 </form>
-                
-<button class="theme-toggle">
-  <div class="visually-hidden theme-label-when-auto">Toggle theme (current theme: auto)</div>
-  <div class="visually-hidden theme-label-when-light">Toggle theme (current theme: light)</div>
-  <div class="visually-hidden theme-label-when-dark">Toggle theme (current theme: dark)</div>
-  <svg aria-hidden="true" class="theme-icon-when-auto">
-    <use xlink:href="#icon-auto" />
-  </svg>
-  <svg aria-hidden="true" class="theme-icon-when-dark">
-    <use xlink:href="#icon-moon" />
-  </svg>
-  <svg aria-hidden="true" class="theme-icon-when-light">
-    <use xlink:href="#icon-sun" />
-  </svg>
-</button>
-
-            
-        </div>
-        
-        
-        
-      </header>
-    
-    <!-- END Header -->
-    
-        <!-- Breadcrumbs -->
+                <button class="theme-toggle">
+                    <div class="visually-hidden theme-label-when-auto">Toggle theme (current theme: auto)</div>
+                    <div class="visually-hidden theme-label-when-light">Toggle theme (current theme: light)</div>
+                    <div class="visually-hidden theme-label-when-dark">Toggle theme (current theme: dark)</div>
+                    <svg aria-hidden="true" class="theme-icon-when-auto"><use xlink:href="#icon-auto" /></svg>
+                    <svg aria-hidden="true" class="theme-icon-when-dark"><use xlink:href="#icon-moon" /></svg>
+                    <svg aria-hidden="true" class="theme-icon-when-light"><use xlink:href="#icon-sun" /></svg>
+                </button>
+            </div>
+        </header>
         <nav aria-label="Breadcrumbs">
-                <div class="breadcrumbs">
-                    <a href="/LOGIN/home/">Home</a> &rsaquo;
-                    <a href="/LOGIN/">Login</a> &rsaquo;                    
+            <div class="breadcrumbs">
+                <a href="/LOGIN/home/">Home</a> &rsaquo;
+                <a href="/LOGIN/">Login</a> &rsaquo;
+            </div>
+        </nav>
+        <div class="main" id="main">
+            <button class="sticky toggle-nav-sidebar" id="toggle-nav-sidebar" aria-label="Toggle navigation"></button>
+            <nav class="sticky" id="nav-sidebar" aria-label="Sidebar">
+                <input type="search" id="nav-filter" placeholder="Start typing to filter…" aria-label="Filter navigation items">
+                <ul id="audit-list">
+                    {% for auditoria in auditorias %}
+                        <li class="audit-item">{{ auditoria }}</li>
+                    {% endfor %}
+                </ul>
+            </nav>            
+            <main id="content-start" class="content" tabindex="-1">
+                <div id="content" class="colM">
+                    <h1>Agendar auditorias</h1>
+                    <div id="content-main">
+                        <form method="post" id="agendaauditorias_form" novalidate>
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <div class="submit-row">
+                                <input type="submit" value="GUARDAR" class="default" name="_save">
+                                <input type="submit" value="Guardar y Continuar Editando" name="_continue">
+                                <input type="submit" value="Eliminar Auditoria" name="_delete">
+                            </div>
+                        </form>
+                    </div>
+                    <br class="clear">
                 </div>
-            </nav>
-    
-    
-
-    <div class="main" id="main">
-      
-        
-          
-<button class="sticky toggle-nav-sidebar" id="toggle-nav-sidebar" aria-label="Toggle navigation"></button>
-<nav class="sticky" id="nav-sidebar" aria-label="Sidebar">
-  <input type="search" id="nav-filter"
-         placeholder="Start typing to filter…"
-         aria-label="Filter navigation items">
-
-</nav>
-
-        
-      
-      <main id="content-start" class="content" tabindex="-1">
-        
-          
-        
-        <!-- Content -->
-        <div id="content" class="colM">
-          
-          <h1>Agendar auditorias</h1>
-          
-          <div id="content-main">
-
-
-
-<form method="post" id="agendaauditorias_form" novalidate><input type="hidden" name="csrfmiddlewaretoken" value="EClg8OSrdjMfdTOyFPC0aNslYCoGIOGcgEUVJIeCKBJL5Tc50e4oDPreyAhI27wh">
-<div>
-
-
-
-
-
-
-
-  <fieldset class="module aligned ">
-    
-    
-    
-        <div class="form-row field-nombre_entidad">
-            
-            
-                <div>
-                    
-                        <div class="flex-container">
-                            
-                                <label class="required" for="id_nombre_entidad">Nombre entidad:</label>
-                                
-                                    <input type="text" name="nombre_entidad" class="vTextField" maxlength="255" required id="id_nombre_entidad">
-                                
-                            
-                        </div>
-                    
-                </div>
-            
-            
+                <div id="footer"></div>
+            </main>
         </div>
-    
-        <div class="form-row field-tipo_entidad">
-            
-            
-                <div>
-                    
-                        <div class="flex-container">
-                            
-                                <label class="required" for="id_tipo_entidad">Tipo entidad:</label>
-                                
-                                    <input type="text" name="tipo_entidad" class="vTextField" maxlength="100" required id="id_tipo_entidad">
-                                
-                            
-                        </div>
-                    
-                </div>
-            
-            
-        </div>
-    
-        <div class="form-row field-sector_industria">
-            
-            
-                <div>
-                    
-                        <div class="flex-container">
-                            
-                                <label class="required" for="id_sector_industria">Sector industria:</label>
-                                
-                                    <input type="text" name="sector_industria" class="vTextField" maxlength="100" required id="id_sector_industria">
-                                
-                            
-                        </div>
-                    
-                </div>
-            
-            
-        </div>
-    
-        <div class="form-row field-direccion">
-            
-            
-                <div>
-                    
-                        <div class="flex-container">
-                            
-                                <label class="required" for="id_direccion">Direccion:</label>
-                                
-                                    <input type="text" name="direccion" class="vTextField" maxlength="255" required id="id_direccion">
-                                
-                            
-                        </div>
-                    
-                </div>
-            
-            
-        </div>
-    
-        <div class="form-row field-contacto_entidad_email">
-            
-            
-                <div>
-                    
-                        <div class="flex-container">
-                            
-                                <label class="required" for="id_contacto_entidad_email">Contacto entidad email:</label>
-                                
-                                    <input type="email" name="contacto_entidad_email" class="vTextField" maxlength="254" required id="id_contacto_entidad_email">
-                                
-                            
-                        </div>
-                    
-                </div>
-            
-            
-        </div>
-    
-        <div class="form-row field-fecha_inicio">
-            
-            
-                <div>
-                    
-                        <div class="flex-container">
-                            
-                                <label class="required">Fecha inicio:</label>
-                                
-                                    <p class="datetime">
-  Date: <input type="text" name="fecha_inicio_0" class="vDateField" size="10" required id="id_fecha_inicio_0">
-
-<br>
-  Time: <input type="text" name="fecha_inicio_1" class="vTimeField" size="8" required id="id_fecha_inicio_1">
-
-
-</p>
-                                
-                            
-                        </div>
-                    
-                </div>
-            
-            
-        </div>
-    
-        <div class="form-row field-fecha_fin">
-            
-            
-                <div>
-                    
-                        <div class="flex-container">
-                            
-                                <label class="required">Fecha fin:</label>
-                                
-                                    <p class="datetime">
-  Date: <input type="text" name="fecha_fin_0" class="vDateField" size="10" required id="id_fecha_fin_0">
-
-<br>
-  Time: <input type="text" name="fecha_fin_1" class="vTimeField" size="8" required id="id_fecha_fin_1">
-
-
-</p>
-                                
-                            
-                        </div>
-                    
-                </div>
-            
-            
-        </div>
-    
-        <div class="form-row field-duracion_dia">
-            
-            
-                <div>
-                    
-                        <div class="flex-container">
-                            
-                                <label class="required" for="id_duracion_dia">Duracion dia:</label>
-                                
-                                    <input type="number" name="duracion_dia" class="vIntegerField" required id="id_duracion_dia">
-                                
-                            
-                        </div>
-                    
-                </div>
-            
-            
-        </div>
-    
-        <div class="form-row field-area_departamento">
-            
-            
-                <div>
-                    
-                        <div class="flex-container">
-                            
-                                <label class="required" for="id_area_departamento">Area departamento:</label>
-                                
-                                    <input type="text" name="area_departamento" class="vTextField" maxlength="255" required id="id_area_departamento">
-                                
-                            
-                        </div>
-                    
-                </div>
-            
-            
-        </div>
-    
-        <div class="form-row field-auditor">
-            
-            
-                <div>
-                    
-                        <div class="flex-container">
-                            
-                                <label class="required" for="id_auditor">Auditor:</label>
-                                
-                                    <input type="text" name="auditor" class="vTextField" maxlength="255" required id="id_auditor">
-                                
-                            
-                        </div>
-                    
-                </div>
-            
-            
-        </div>
-    
-        <div class="form-row field-fk_plantilla">
-            
-            
-                <div>
-                    
-                        <div class="flex-container">
-                            
-                                <label class="required" for="id_fk_plantilla">Fk plantilla:</label>
-                                
-                                    <div class="related-widget-wrapper" data-model-ref="plantilla">
-    <select name="fk_plantilla" required id="id_fk_plantilla">
-  <option value="" selected>---------</option>
-
-</select>
-    
-        <a class="related-widget-wrapper-link change-related" id="change_id_fk_plantilla"
-            data-href-template="/admin/LOGIN/plantilla/__fk__/change/?_to_field=id_plantilla&amp;_popup=1"
-            data-popup="yes"
-            title="Change selected plantilla"><img src="/static/admin/img/icon-changelink.svg" alt="" width="20" height="20"></a><a class="related-widget-wrapper-link add-related" id="add_id_fk_plantilla"
-            data-popup="yes"
-            href="/admin/LOGIN/plantilla/add/?_to_field=id_plantilla&amp;_popup=1"
-            title="Add another plantilla"><img src="/static/admin/img/icon-addlink.svg" alt="" width="20" height="20"></a><a class="related-widget-wrapper-link view-related" id="view_id_fk_plantilla"
-             data-href-template="/admin/LOGIN/plantilla/__fk__/change/?_to_field=id_plantilla"
-             title="View selected plantilla"><img src="/static/admin/img/icon-viewlink.svg" alt="" width="20" height="20"></a>
-    
-</div>
-                                
-                            
-                        </div>
-                    
-                </div>
-            
-            
-        </div>
-    
-        <div class="form-row field-objetivo">
-            
-            
-                <div>
-                    
-                        <div class="flex-container">
-                            
-                                <label class="required" for="id_objetivo">Objetivo:</label>
-                                
-                                    <input type="text" name="objetivo" class="vTextField" maxlength="1000" required id="id_objetivo">
-                                
-                            
-                        </div>
-                    
-                </div>
-            
-            
-        </div>
-    
-</fieldset>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="submit-row">
-
-<input type="submit" value="Save" class="default" name="_save">
-
-<input type="submit" value="Save and add another" name="_addanother">
-<input type="submit" value="Save and continue editing" name="_continue">
-
-
-
-</div>
-
-
-
-    <script id="django-admin-form-add-constants"
-            src="/static/admin/js/change_form.js"
-            
-                data-model-name="agendaauditorias"
-            
-            async>
-    </script>
-
-
-
-
-<script id="django-admin-prepopulated-fields-constants"
-        src="/static/admin/js/prepopulate_init.js"
-        data-prepopulated-fields="[]">
-</script>
-
-
-</div>
-</form></div>
-
-          
-          <br class="clear">
-        </div>
-        <!-- END Content -->
-        <div id="footer"></div>
-      </main>
     </div>
-</div>
-<!-- END Container -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="base-svgs">
+        <symbol viewBox="0 0 24 24" width="1rem" height="1rem" id="icon-auto">
+            <path d="M0 0h24v24H0z" fill="currentColor"/>
+            <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2V4a8 8 0 1 0 0 16z"/>
+        </symbol>
+        <symbol viewBox="0 0 24 24" width="1rem" height="1rem" id="icon-moon">
+            <path d="M0 0h24v24H0z" fill="currentColor"/>
+            <path d="M10 7a7 7 0 0 0 12 4.9v.1c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2h.1A6.979 6.979 0 0 0 10 7zm-6 5a8 8 0 0 0 15.062 3.762A9 9 0 0 1 8.238 4.938 7.999 7.999 0 0 0 4 12z"/>
+        </symbol>
+        <symbol viewBox="0 0 24 24" width="1rem" height="1rem" id="icon-sun">
+            <path d="M0 0h24v24H0z" fill="currentColor"/>
+            <path d="M6.995 12c0-2.761 2.246-5.005 5.005-5.005S17.005 9.239 17.005 12c0 2.762-2.246 5.005-5.005 5.005S6.995 14.761 6.995 12zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zm11-9v2h-3v-2h3zM5 11v2H2v-2h3zm9.95-7.071l1.414 1.415-2.828 2.828-1.415-1.414L14.95 3.93zm-9.9 9.9L3.93 14.95 1.101 17.78l1.414 1.414L5.05 15.343zm13.243 13.243l1.415-1.414 2.828 2.828-1.414 1.414-2.829-2.828zm-9.9-9.9L3.93 9.05 1.1 6.222l1.415-1.415 2.828 2.829z"/>
+        </symbol>
+    </svg>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    const filterInput = document.getElementById('nav-filter');
+    const auditItems = document.querySelectorAll('.audit-item');
 
-<!-- SVGs -->
-<svg xmlns="http://www.w3.org/2000/svg" class="base-svgs">
-  <symbol viewBox="0 0 24 24" width="1rem" height="1rem" id="icon-auto"><path d="M0 0h24v24H0z" fill="currentColor"/><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2V4a8 8 0 1 0 0 16z"/></symbol>
-  <symbol viewBox="0 0 24 24" width="1rem" height="1rem" id="icon-moon"><path d="M0 0h24v24H0z" fill="currentColor"/><path d="M10 7a7 7 0 0 0 12 4.9v.1c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2h.1A6.979 6.979 0 0 0 10 7zm-6 5a8 8 0 0 0 15.062 3.762A9 9 0 0 1 8.238 4.938 7.999 7.999 0 0 0 4 12z"/></symbol>
-  <symbol viewBox="0 0 24 24" width="1rem" height="1rem" id="icon-sun"><path d="M0 0h24v24H0z" fill="currentColor"/><path d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.515 4.929l1.414-1.414L7.05 5.636 5.636 7.05 3.515 4.93zM16.95 18.364l1.414-1.414 2.121 2.121-1.414 1.414-2.121-2.121zm2.121-14.85l1.414 1.415-2.121 2.121-1.414-1.414 2.121-2.121zM5.636 16.95l1.414 1.414-2.121 2.121-1.414-1.414 2.121-2.121zM23 11v2h-3v-2h3zM4 11v2H1v-2h3z"/></symbol>
-</svg>
-<!-- END SVGs -->
+    filterInput.addEventListener('input', function() {
+        const filterValue = this.value.toLowerCase();
+        auditItems.forEach(function(item) {
+            const text = item.textContent.toLowerCase();
+            if (text.includes(filterValue)) {
+                item.style.display = '';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    });
+});
+    </script>
 </body>
 </html>
