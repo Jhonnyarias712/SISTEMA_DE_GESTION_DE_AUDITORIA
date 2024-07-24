@@ -12,6 +12,7 @@ from .views import guardar_usuario
 from .views import guardar_usuario_2
 from .views import formulario_actividades
 from .views import formulario_view
+from .views import agendar_auditoria_jar
 
 
 
@@ -23,7 +24,7 @@ urlpatterns = [
     path('agendar_auditoria/', agendar_auditoria_view, name='AGENDAR_AUDITORIA'),
     path('agendar_auditoria/<int:pk>/', agendar_auditoria_view, name='AGENDAR_AUDITORIA_EDITAR'),
     path('auditoria/', auditoria_view, name='AUDITORIA'),
-    path('auditoria/<int:pk>/', auditoria_view, name='AUDITORIA_EDITAR'),
+    #path('auditoria/<int:pk>/', auditoria_view, name='AUDITORIA_EDITAR'),
     path('evalua_actividad/', evalua_actividad_view, name='EVALUA_ACTIVIDAD'),
     path('formulario_view/', formulario_view, name='FORMULARIO_ACTIVIDAD'),
     path('evalua_actividad/<int:pk>/', evalua_actividad_view, name='EVALUA_ACTIVIDAD_EDITAR'),
@@ -33,6 +34,7 @@ urlpatterns = [
     path('guardar_usuario/', guardar_usuario, name='guardar_usuario'),
     path('formulario_actividades/', formulario_actividades, name='formulario_actividades'),
     path('guardar_usuario/', guardar_usuario_2, name='guardar_usuario_2'),
+    path('agenda_auditoria_jar/', agendar_auditoria_jar, name='AGENDA_AUDITORIA_JAR'),
     
     
 ]

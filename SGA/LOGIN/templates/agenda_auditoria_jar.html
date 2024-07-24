@@ -1,0 +1,480 @@
+
+<!DOCTYPE html>
+
+<html lang="en-us" dir="ltr">
+<head>
+<title>Add agenda auditorias | Django site admin</title>
+<link rel="stylesheet" href="/static/admin/css/base.css">
+    <link rel="stylesheet" href="/static/admin/css/dark_mode.css">
+    <script src="/static/admin/js/theme.js" defer></script>
+    <link rel="stylesheet" href="/static/admin/css/nav_sidebar.css">
+    <script src="/static/admin/js/nav_sidebar.js" defer></script>
+    <link rel="stylesheet" href="/static/admin/css/forms.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/admin/css/responsive.css">
+    <script src="/static/admin/js/admin/DateTimeShortcuts.js"></script>
+    
+    <script src="./js/vendor/theme.js" defer></script>
+    <script src="./vendor/nav_sidebar.js" defer></script>
+    <script src="/admin/jsi18n/"></script>
+    <script src="./vendor/jquery/jquery.js"></script>
+    <script src="./vendor/calendar.js"></script>
+    <script src="./vendor/jquery.init.js"></script>
+    <script src="./admin/DateTimeShortcuts.js"></script>
+    <script src="./vendor/core.js"></script>
+    <script src="./admin/RelatedObjectLookups.js"></script>
+    <script src="./vendor/actions.js"></script>
+    <script src="./vendor/urlify.js"></script>
+    <script src="./vendor/prepopulate.js"></script>
+    <script src="./vendor/xregexp/xregexp.js"></script>
+    <meta name="robots" content="NONE,NOARCHIVE">
+
+    <style>
+        .logo-small {
+          width: 50px; /* Cambia este valor según el tamaño deseado */
+          height: auto; /* Para mantener la proporción */
+          padding-right: 30px;
+        }
+    </style>
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/admin/css/responsive.css">
+    
+
+<meta name="robots" content="NONE,NOARCHIVE">
+</head>
+
+<body class=" app-LOGIN model-agendaauditorias change-form"
+  data-admin-utc-offset="0">
+<a href="#content-start" class="skip-to-content-link">Skip to main content</a>
+<!-- Container -->
+<div id="container">
+
+    
+    <!-- Header -->
+    
+      <header id="header">
+        <div id="branding">
+
+            
+<div id="site-name"><a href="/admin/">Django administration</a></div>
+    <img src="/static/imagen/logosga.png" alt="Logo SGA" class="logo-small">
+
+        </div>
+        
+        
+        <div id="user-tools">
+            
+                Welcome,
+                <strong>jhonny</strong>.
+            
+            
+                
+                    <a href="/">View site</a> /
+                
+                
+                    
+                    
+                
+                
+                <a href="/admin/password_change/">Change password</a> /
+                
+                <a href="/LOGIN/">Cerrar Sesión</a>
+                
+<button class="theme-toggle">
+  <div class="visually-hidden theme-label-when-auto">Toggle theme (current theme: auto)</div>
+  <div class="visually-hidden theme-label-when-light">Toggle theme (current theme: light)</div>
+  <div class="visually-hidden theme-label-when-dark">Toggle theme (current theme: dark)</div>
+  <svg aria-hidden="true" class="theme-icon-when-auto">
+    <use xlink:href="#icon-auto" />
+  </svg>
+  <svg aria-hidden="true" class="theme-icon-when-dark">
+    <use xlink:href="#icon-moon" />
+  </svg>
+  <svg aria-hidden="true" class="theme-icon-when-light">
+    <use xlink:href="#icon-sun" />
+  </svg>
+</button>
+
+            
+        </div>
+        
+        
+        
+      </header>
+    
+    <!-- END Header -->
+    
+      <nav aria-label="Breadcrumbs">
+        
+<div class="breadcrumbs">
+<a href="/LOGIN/home/">Home</a>
+&rsaquo; <a href="/admin/LOGIN/">Login</a>
+&rsaquo; <a href="/admin/LOGIN/agendaauditorias/">Agenda auditoriass</a>
+&rsaquo; Add agenda auditorias
+
+</div>
+
+      </nav>
+    
+    
+
+    <div class="main" id="main">
+      
+        
+          
+<button class="sticky toggle-nav-sidebar" id="toggle-nav-sidebar" aria-label="Toggle navigation"></button>
+
+
+        
+      
+      <main id="content-start" class="content" tabindex="-1">
+        
+        <!-- Content -->
+
+
+
+        
+        <div id="content" class="colM">
+                <h1>Ver auditorias agenda :</h1>
+                <form method="post" action="{% url 'AGENDA_AUDITORIA_JAR' %}">
+                        {% csrf_token %}
+                        <div>
+                            <select name="auditorias_cb" required id="id_auditorias_cb">
+                                <option value="" selected>---------</option>
+                                    <!--NUEVO FOR PARA CONCATENAR EL NOMBRE DE LA PLANTILLA AL FORMULARIO-->
+                                    {% for agendaAuditorias in AgendaAuditorias %}  
+                                        <option value="{{ agendaAuditorias.id_agenda }}">{{ agendaAuditorias.nombre_entidad }} {{ agendaAuditorias.auditor }}</option>
+                                    {% endfor %}
+                            </select>
+                            <!--
+                            <input type="button" value="✎ Editar" class="default" name="_xxx" onclick="actualizar_campos_form()">
+                            -->
+                            <input type="submit" value="✘ Eliminar" class="default" name="_delete_age">
+                        </div>
+                    </form>
+
+
+
+          <h1>Add agenda auditorias</h1>
+          
+          <div id="content-main">
+
+
+
+<form method="post" action="{% url 'AGENDA_AUDITORIA_JAR' %}">
+        {% csrf_token %}
+<div>
+
+
+
+
+
+
+
+  <fieldset class="module aligned ">
+    
+    
+    
+        <div class="form-row field-nombre_entidad">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label class="required" for="id_nombre_entidad">Nombre entidad:</label>
+                                
+                                    <input type="text" name="nombre_entidad" class="vTextField" maxlength="255" required id="id_nombre_entidad">
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+        <div class="form-row field-tipo_entidad">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label class="required" for="id_tipo_entidad">Tipo entidad:</label>
+                                
+                                    <input type="text" name="tipo_entidad" class="vTextField" maxlength="100" required id="id_tipo_entidad">
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+        <div class="form-row field-sector_industria">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label class="required" for="id_sector_industria">Sector industria:</label>
+                                
+                                    <input type="text" name="sector_industria" class="vTextField" maxlength="100" required id="id_sector_industria">
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+        <div class="form-row field-direccion">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label class="required" for="id_direccion">Direccion:</label>
+                                
+                                    <input type="text" name="direccion" class="vTextField" maxlength="255" required id="id_direccion">
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+        <div class="form-row field-contacto_entidad_email">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label class="required" for="id_contacto_entidad_email">Contacto entidad email:</label>
+                                
+                                    <input type="email" name="contacto_entidad_email" class="vTextField" maxlength="254" required id="id_contacto_entidad_email">
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+                </div>
+
+                <div class="form-row field-fecha_inicio">
+
+
+                <div>
+
+                <div class="flex-container">
+
+                <label class="required">Fecha inicio:</label>
+
+                <p class="datetime">
+                        <input type="datetime-local" name="fecha_inicio" required id="id_fecha_inicio">
+                    </p>
+
+                </div>
+
+                </div>
+
+
+                </div>
+    
+        <div class="form-row field-fecha_fin">            
+                <div>                    
+                        <div class="flex-container">                            
+                                <label class="required">Fecha fin:</label>                                
+                                <p class="datetime">
+                                        <input type="datetime-local" name="fecha_fin" required id="id_fecha_fin">
+                                </p>                                
+                        </div>                    
+                </div>     
+        </div>
+    
+        <div class="form-row field-duracion_dia">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label class="required" for="id_duracion_dia">Duracion dia:</label>
+                                
+                                    <input type="number" name="duracion_dia" class="vIntegerField" required id="id_duracion_dia">
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+        <div class="form-row field-area_departamento">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label class="required" for="id_area_departamento">Area departamento:</label>
+                                
+                                    <input type="text" name="area_departamento" class="vTextField" maxlength="255" required id="id_area_departamento">
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+        <div class="form-row field-auditor">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label class="required" for="id_auditor">Auditor:</label>
+                                
+                                    <div class="related-widget-wrapper" data-model-ref="users">
+                    <select name="owner" required id="id_usuario">
+                        <option value="" selected>---------</option>
+                        {% for usuario in USERS %}
+                            <option value="{{ usuario.id_usuario }}">{{ usuario.full_name }}</option>
+                            
+                        {% endfor %}
+                    </select>
+    
+    
+</div>
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+        <div class="form-row field-fk_plantilla">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label class="required" for="id_fk_plantilla">Fk plantilla:</label>
+                               
+                                <select name="Plantilla_cb" required id="id_plantilla_cb">
+                                <option value="" selected>---------</option>
+                                {% for plantilla in Plantilla %}
+                                        <option value="{{ plantilla.id_plantilla }}">{{ plantilla.nombre_plantilla }}</option>
+                                {% endfor %}
+                                </select>
+       
+</div>
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+        <div class="form-row field-objetivo">
+            
+            
+                <div>
+                    
+                        <div class="flex-container">
+                            
+                                <label class="required" for="id_objetivo">Objetivo:</label>
+                                
+                                    <input type="text" name="objetivo" class="vTextField" maxlength="1000" required id="id_objetivo">
+                                
+                            
+                        </div>
+                    
+                </div>
+            
+            
+        </div>
+    
+</fieldset>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="submit-row">
+
+<input type="submit" value="Save" class="default" name="_save_age">
+
+
+
+</div>
+
+
+
+    <script id="django-admin-form-add-constants"
+            src="/static/admin/js/change_form.js"
+            
+                data-model-name="agendaauditorias"
+            
+            async>
+    </script>
+
+
+
+
+<script id="django-admin-prepopulated-fields-constants"
+        src="/static/admin/js/prepopulate_init.js"
+        data-prepopulated-fields="[]">
+</script>
+
+
+</div>
+</form></div>
+
+          
+          <br class="clear">
+        </div>
+        <!-- END Content -->
+        <div id="footer"></div>
+      </main>
+    </div>
+</div>
+<!-- END Container -->
+
+<!-- SVGs -->
+<svg xmlns="http://www.w3.org/2000/svg" class="base-svgs">
+  <symbol viewBox="0 0 24 24" width="1rem" height="1rem" id="icon-auto"><path d="M0 0h24v24H0z" fill="currentColor"/><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2V4a8 8 0 1 0 0 16z"/></symbol>
+  <symbol viewBox="0 0 24 24" width="1rem" height="1rem" id="icon-moon"><path d="M0 0h24v24H0z" fill="currentColor"/><path d="M10 7a7 7 0 0 0 12 4.9v.1c0 5.523-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2h.1A6.979 6.979 0 0 0 10 7zm-6 5a8 8 0 0 0 15.062 3.762A9 9 0 0 1 8.238 4.938 7.999 7.999 0 0 0 4 12z"/></symbol>
+  <symbol viewBox="0 0 24 24" width="1rem" height="1rem" id="icon-sun"><path d="M0 0h24v24H0z" fill="currentColor"/><path d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.515 4.929l1.414-1.414L7.05 5.636 5.636 7.05 3.515 4.93zM16.95 18.364l1.414-1.414 2.121 2.121-1.414 1.414-2.121-2.121zm2.121-14.85l1.414 1.415-2.121 2.121-1.414-1.414 2.121-2.121zM5.636 16.95l1.414 1.414-2.121 2.121-1.414-1.414 2.121-2.121zM23 11v2h-3v-2h3zM4 11v2H1v-2h3z"/></symbol>
+</svg>
+<!-- END SVGs -->
+</body>
+</html>

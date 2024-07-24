@@ -1,3 +1,4 @@
+from datetime import timezone
 from django.shortcuts import get_object_or_404, render,redirect
 from django.contrib import messages
 from django.http import HttpResponse
@@ -256,6 +257,82 @@ def formulario_actividades(request):
     return render(request, 'formulario_actividades.html',context)
 
 
+def agendar_auditoria_jar(request):
+    
+    #print(f"nombre_plantilla: {formulario}")
+    print("Entra a agendar_auditoria_jar")
+
+    if request.method == 'POST':
+        print("Entra POST ")
+        
+        if '_delete_age' in request.POST:
+            print(f'Entra a delete ')   
+            Auditorias_cb = request.POST.get('auditorias_cb')
+            print(f'ENCONTRADO: {Auditorias_cb}')
+            auditoria = get_object_or_404(AgendaAuditorias, id_agenda=Auditorias_cb) 
+            auditoria.delete()  
+            print('ELIMINADO')            
+            return redirect('AGENDA_AUDITORIA_JAR')
+
+        elif '_save_age' in request.POST:
+            print("Entra SAVE ")
+            Plantilla_cb = request.POST.get('Plantilla_cb')
+            User_cb = request.POST.get('owner')
+            print(f'Plantilla_cb: {Plantilla_cb}')
+            print(f'User ENCONTRADO: {User_cb}')
+
+            Plantilla_encontrada = get_object_or_404(Plantilla, id_plantilla=Plantilla_cb)
+            USERS_encontrada = get_object_or_404(USERS, id_usuario=User_cb)
+            print(f'Plantilla_encontrada ENCONTRADO: {Plantilla_encontrada}')
+            print(f'USERS_encontrada ENCONTRADO: {USERS_encontrada}')
+            fecha_inicio = request.POST.get('fecha_inicio')
+            fecha_fin = request.POST.get('fecha_fin')
+
+            nueva_AgendaAuditorias = AgendaAuditorias(
+            nombre_entidad =  request.POST.get('nombre_entidad'),
+            tipo_entidad = request.POST.get('tipo_entidad'),
+            sector_industria = request.POST.get('sector_industria'),
+            direccion = request.POST.get('direccion'),
+            contacto_entidad_email = request.POST.get('contacto_entidad_email'),
+            fecha_inicio = fecha_inicio,
+            fecha_fin = fecha_fin,
+            duracion_dia = request.POST.get('duracion_dia'),
+            area_departamento = request.POST.get('area_departamento'),
+            auditor = USERS_encontrada,
+            fk_plantilla = Plantilla_encontrada,
+            objetivo = request.POST.get('objetivo')
+            )
+            print(f'nueva_AgendaAuditorias: {nueva_AgendaAuditorias}')
+            nueva_AgendaAuditorias.save()
+
+            Auditoria_nueva=Auditoria(
+                agenda_auditorias = nueva_AgendaAuditorias,
+                fecha_inicio_auditoria = nueva_AgendaAuditorias.fecha_inicio,
+                fecha_fin_auditoria = nueva_AgendaAuditorias.fecha_fin,
+                fecha_inicio_plazo = None,
+                estado_auditoria = "Evaluando",
+                observacion = None,
+                fecha_fin_plazo = None,
+                fecha_cierre_auditoria = None,
+                )
+            Auditoria_nueva.save()
+
+            print(f'gUARDADO CORRECTAMENTE')
+            redirect('AGENDA_AUDITORIA_JAR')
+            
+
+    plantilla = Plantilla.objects.all()
+    agendaAuditorias = AgendaAuditorias.objects.all()
+    users = USERS.objects.all()
+
+    context = {
+        'Plantilla': plantilla,
+        'USERS':users,   
+        'AgendaAuditorias':agendaAuditorias,
+    }
+    return render(request, 'agenda_auditoria_jar.html',context)
+
+
 
 def agendar_auditoria_view(request, pk=None):
     if pk:
@@ -291,62 +368,37 @@ def agendar_auditoria_view(request, pk=None):
     return render(request, 'agendar_auditoria.html', context)
 
 
-def auditoria_view(request, pk=None):
-    if pk:
-        instance = get_object_or_404(Auditoria, pk=pk)
-    else:
-        instance = None
-        
-    if request.method == 'POST':
-        form = AuditoriaForm(request.POST, instance=instance)
-        
-        if form.is_valid():
-            
-            instance = form.save()
-
-            if '_continue' in request.POST:
-                return redirect('AUDITORIA_EDITAR', pk=instance.pk)           
-            else:
-                return redirect('EVALUA_ACTIVIDAD')  # Redirige para auditar
-    else:
-        form = AuditoriaForm(instance=instance)
+def auditoria_view(request):
     
+    if '_delete_age' in request.POST:
+            print(f'Entra a delete ')   
+            Auditorias_cb = request.POST.get('auditorias_cb')
+            print(f'ENCONTRADO: {Auditorias_cb}')
+            auditoria = get_object_or_404(Auditoria, id_agenda=Auditorias_cb) 
+            auditoria.delete()  
+            print('ELIMINADO')            
+            return redirect('AUDITORIA')
+    elif '_auditar' in request.POST:
+        print(f'Entra a auditar ')
+        return redirect('EVALUA_ACTIVIDAD')
+
+
+    auditoria = Auditoria.objects.all()
+    agendaAuditorias = AgendaAuditorias.objects.all()
     context = {
-        'form': form,
-        'MENSAJE': 'CREAR AUDITOR',
+    'AUDITORIA': auditoria,
+    'AGENDAAUDITORIAS':agendaAuditorias,
     }
+
     return render(request, 'auditoria.html', context)
 
 
 def evalua_actividad_view(request, pk=None):
-    if pk:
-        instance = get_object_or_404(EvaluacionActividad, pk=pk)
-    else:
-        instance = None
-
-    if request.method == 'POST':
-        form = AuditarForm(request.POST, instance=instance)
         
-        if form.is_valid():
-            if '_delete' in request.POST:
-                instance.delete()
-                return redirect('EVALUA_ACTIVIDAD')
-            
-            instance = form.save()
-
-            if '_continue' in request.POST:
-                return redirect('EVALUA_ACTIVIDAD_EDITAR', pk=instance.pk)
-            else:
-                return redirect('EVALUA_ACTIVIDAD')
-    else:
-        form = AuditarForm(instance=instance)   
-
-    formulario_form = FormularioForm()  # Crear una instancia vacía del otro formulario
+    auditorias    = Auditoria.objects.all()
 
     context = {
-        'form': form,
-        'formulario_form': formulario_form,  # Pasar el segundo formulario al contexto
-        'MENSAJE': 'EVALUAR ACTIVIDAD',
+    'auditorias': auditorias,    
     }
     return render(request, 'evualuar_actividades.html', context)
 

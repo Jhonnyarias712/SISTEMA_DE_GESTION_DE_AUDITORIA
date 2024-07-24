@@ -84,13 +84,26 @@
             <!-- Content -->
             <div id="content" class="colM">
                 <h1>Auditoria</h1>
-                <div id="content-main">
-                    <form method="post" id="auditoria_form" novalidate>
+                <div id="content-main">                    
+                    <form method="post" action="{% url 'AUDITORIA' %}">
                         {% csrf_token %}
-                        {{ form.as_p }}
-                        <div class="submit-row">
-                            <input type="submit" value="AUDITAR" class="default" name="_auditar">
-                            <input type="submit" value="Guardar y Continuar Editando" name="_continue">
+                        <div>
+                            <select name="auditorias_cb" required id="id_auditorias_cb">
+                                <option value="" selected>---------</option>
+                                    <!--NUEVO FOR PARA CONCATENAR EL NOMBRE DE LA PLANTILLA AL FORMULARIO-->
+                                    {% for AUD in AUDITORIA %}  
+                                    {% for AgendaAuditorias in AGENDAAUDITORIAS %}
+                                            {% if AgendaAuditorias.id_agenda == AUD.agenda_auditorias.id_agenda %}
+                                            <option value="{{ AUD.id_auditar }}">{{ AUD.agenda_auditorias.nombre_entidad }} - {{ AgendaAuditorias.auditor.full_name }}</option>
+                                            {% endif %}
+                                        {% endfor %}                                    
+                                    {% endfor %}    
+                            </select>
+                            <!--
+                            <input type="button" value="✎ Editar" class="default" name="_xxx" onclick="actualizar_campos_form()">
+                            -->
+                            <input type="submit" value="☜ Auditar" class="default" name="_auditar"> 
+                            <input type="submit" value="✘ Eliminar" class="default" name="_delete_age">
                         </div>
                     </form>
                 </div>

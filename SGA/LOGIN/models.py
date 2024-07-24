@@ -30,7 +30,7 @@ class Formulario(models.Model):
     actividad = models.CharField(max_length=1200)
 
     def __str__(self):
-        return f"Formulario {self.id} - {self.id_actividad}"
+        return f"Formulario {self.id_actividad} - {self.actividad}"
     
 class AgendaAuditorias(models.Model):
     id_agenda = models.AutoField(primary_key=True)
@@ -55,7 +55,7 @@ class Auditoria(models.Model):
     agenda_auditorias = models.ForeignKey(AgendaAuditorias, on_delete=models.CASCADE)
     fecha_inicio_auditoria = models.DateTimeField()
     fecha_fin_auditoria = models.DateTimeField()
-    fecha_inicio_plazo = models.DateTimeField()
+    fecha_inicio_plazo = models.DateTimeField(blank=True, null=True)
     estado_auditoria = models.CharField(max_length=10, choices=[("EVALUANDO", "Evaluando")])
     observacion = models.TextField(blank=True, null=True)
     fecha_fin_plazo = models.DateTimeField(blank=True, null=True)
@@ -66,7 +66,8 @@ class Auditoria(models.Model):
 
 class EvaluacionActividad(models.Model):
     id = models.AutoField(primary_key=True)
-    auditoria_id = models.ForeignKey(Auditoria, on_delete=models.CASCADE, related_name='evaluacionactividad_set')
+    auditoria_id = models.ForeignKey(Auditoria, on_delete=models.CASCADE)
+    id_actividad = models.ForeignKey(Formulario, on_delete=models.CASCADE)
     respuesta = models.CharField(max_length=10, choices=[("APROBADA", "Aprobada"), ("REPROBADA", "Reprobada")])
     observaciones = models.CharField(max_length=1000)
     plazo_ini_observacion = models.DateTimeField()
