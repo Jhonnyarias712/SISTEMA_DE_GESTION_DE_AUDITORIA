@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
+
 <head>
     <title>Evalua actividades</title>
     <link rel="stylesheet" href="/static/admin/css/base.css">
@@ -28,78 +29,262 @@
             height: auto;
             padding-right: 30px;
         }
+
         .form-container {
             margin-bottom: 20px;
         }
     </style>
 </head>
+
 <body class="app-LOGIN model-evaluacionactividad change-form" data-admin-utc-offset="0">
-<a href="#content-start" class="skip-to-content-link">Skip to main content</a>
-<div id="container">
-    <header id="header">
-        <div id="branding">
-            <div id="site-name">
-                <img src="/static/imagen/logosga.png" alt="Logo SGA" class="logo-small">
-                <a href="/admin/">SISTEMA DE GESTION DE AUDITORIA</a>
-            </div>
-        </div>
-        <div id="user-tools">
-            Welcome, <strong>USER</strong>.
-            <form id="logout-form" method="post" action="/admin/logout/">
-                <input type="hidden" name="csrfmiddlewaretoken" value="IzB6GzAUqOhV34xbTuCMQGN7YYgQz5TVkBaLhtW5X6erV4VIeT4ajIM0yW9SToJ0">
-                <button type="submit">Log out</button>
-            </form>
-            <button class="theme-toggle">
-                <div class="visually-hidden theme-label-when-auto">Toggle theme (current theme: auto)</div>
-                <div class="visually-hidden theme-label-when-light">Toggle theme (current theme: light)</div>
-                <div class="visually-hidden theme-label-when-dark">Toggle theme (current theme: dark)</div>
-                <svg aria-hidden="true" class="theme-icon-when-auto">
-                    <use xlink:href="#icon-auto"></use>
-                </svg>
-                <svg aria-hidden="true" class="theme-icon-when-dark">
-                    <use xlink:href="#icon-moon"></use>
-                </svg>
-                <svg aria-hidden="true" class="theme-icon-when-light">
-                    <use xlink:href="#icon-sun"></use>
-                </svg>
-            </button>
-        </div>
-    </header>
-    <nav aria-label="Breadcrumbs">
-        <div class="breadcrumbs">
-            <a href="/LOGIN/home/">Home</a> &rsaquo;
-            <a href="/LOGIN/">Login</a> &rsaquo;
-        </div>
-    </nav>
-    <div class="main" id="main">
-        <button class="sticky toggle-nav-sidebar" id="toggle-nav-sidebar" aria-label="Toggle navigation"></button>
-        <nav class="sticky" id="nav-sidebar" aria-label="Sidebar">
-            <input type="search" id="nav-filter" placeholder="Start typing to filter…" aria-label="Filter navigation items">
-        </nav>
-        <main id="content-start" class="content" tabindex="-1">
-            <div id="content" class="colM">
-                <h1>EVALUAR ACTIVIDAD</h1>
-                <div id="content-main">
-                    <!-- Primer Formulario -->
-                    <div class="form-container">
-                        <form method="post" id="formulario_form" novalidate>
-                            {% csrf_token %}
-                            {{ formulario_form.as_p }}
-                        <form method="post" id="evaluacionactividad_form" novalidate>
-                            {% csrf_token %}
-                            {{ form.as_p }}
-                            <div class="submit-row">
-                                <input type="submit" value="GUARDAR Y CONTINUAR EDITANDO" class="default" name="_continue">
-                                <input type="submit" value="Eliminar" name="_delete">
-                            </div>
-                        </form>
-                    </div>                  
+    <a href="#content-start" class="skip-to-content-link">Skip to main content</a>
+    <div id="container">
+        <header id="header">
+            <div id="branding">
+                <div id="site-name">
+                    <img src="/static/imagen/logosga.png" alt="Logo SGA" class="logo-small">
+                    <a href="/admin/">SISTEMA DE GESTION DE AUDITORIA</a>
                 </div>
-                <br class="clear">
             </div>
-        </main>
+            <div id="user-tools">
+                Welcome, <strong>USER</strong>.
+                <form id="logout-form" method="post" action="/admin/logout/">
+                    <input type="hidden" name="csrfmiddlewaretoken"
+                        value="IzB6GzAUqOhV34xbTuCMQGN7YYgQz5TVkBaLhtW5X6erV4VIeT4ajIM0yW9SToJ0">
+                    <button type="submit">Log out</button>
+                </form>
+                <button class="theme-toggle">
+                    <div class="visually-hidden theme-label-when-auto">Toggle theme (current theme: auto)</div>
+                    <div class="visually-hidden theme-label-when-light">Toggle theme (current theme: light)</div>
+                    <div class="visually-hidden theme-label-when-dark">Toggle theme (current theme: dark)</div>
+                    <svg aria-hidden="true" class="theme-icon-when-auto">
+                        <use xlink:href="#icon-auto"></use>
+                    </svg>
+                    <svg aria-hidden="true" class="theme-icon-when-dark">
+                        <use xlink:href="#icon-moon"></use>
+                    </svg>
+                    <svg aria-hidden="true" class="theme-icon-when-light">
+                        <use xlink:href="#icon-sun"></use>
+                    </svg>
+                </button>
+            </div>
+        </header>
+        <nav aria-label="Breadcrumbs">
+            <div class="breadcrumbs">
+                <a href="/LOGIN/home/">Home</a> &rsaquo;
+                <a href="/LOGIN/">Login</a> &rsaquo;
+            </div>
+        </nav>
+        <div class="main" id="main">
+            <button class="sticky toggle-nav-sidebar" id="toggle-nav-sidebar" aria-label="Toggle navigation"></button>
+
+            <main id="content-start" class="content" tabindex="-1">
+                <div id="content" class="colM">
+                    <h1>EVALUAR ACTIVIDAD DE AUDITORIA</h1>
+                    <form method="post" action="{% url 'AUDITORIA' %}">
+                        {% csrf_token %}
+                        <div>
+                            <select name="auditorias_cb" required id="id_auditorias_cb">
+                                <option value="" selected>---------</option>
+                                <!--NUEVO FOR PARA CONCATENAR EL NOMBRE DE LA PLANTILLA AL FORMULARIO-->
+                                {% for evaluacionActividad in EVALUACIONACTIVIDAD %}                                
+                                <option value="{{ evaluacionActividad.id }}">{{ evaluacionActividad }}</option>
+                                {% endfor %}
+                            </select>
+                            <!--
+                        <input type="button" value="✎ Editar" class="default" name="_xxx" onclick="actualizar_campos_form()">
+                        -->
+                            <input type="submit" value="✘ Eliminar" class="default" name="_delete">
+                        </div>
+                    </form>
+                    <br class="clear">
+
+
+
+
+
+                </div>
+            </main>
+        </div>
+
+
+        <form method="post" action="{% url 'EVALUA_ACTIVIDAD_EDITAR' %}">
+            {% csrf_token %}
+            <div>
+                <fieldset class="module aligned ">
+
+
+
+                    <div class="form-row field-auditoria_id">
+
+
+                        <div>
+
+                            <div class="flex-container">
+
+                                <label class="required" for="id_auditoria_id">Auditoria id:</label>
+
+                                <div class="related-widget-wrapper" data-model-ref="auditoria">
+                                    <select name="auditorias_cbb" required id="id_auditorias_cbb">
+                                        <option value="" selected>---------</option>
+                                        <!--NUEVO FOR PARA CONCATENAR EL NOMBRE DE LA PLANTILLA AL FORMULARIO-->
+                                        {% for AUD in AUDITORIA %}
+                                        {% for AgendaAuditorias in AGENDAAUDITORIAS %}
+                                        {% if AgendaAuditorias.id_agenda == AUD.agenda_auditorias.id_agenda %}
+                                        <option value="{{ AUD.id_auditar }}">{{ AUD.agenda_auditorias.nombre_entidad }}
+                                            - {{ AgendaAuditorias.auditor.full_name }}</option>
+                                        {% endif %}
+                                        {% endfor %}
+                                        {% endfor %}
+                                    </select>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                    <div class="form-row field-id_actividad">
+
+
+                        <div>
+
+                            <div class="flex-container">
+
+                                <label class="required" for="id_formulario_cb">Id actividad:</label>
+
+                                <div class="related-widget-wrapper" data-model-ref="formulario">
+                                    <select name="formulario_cb" required id="id_formulario_cb">
+                                        <option value="" selected>---------</option>
+                                        {% for formulario in FORMULARIO %}
+                                        <option value="{{ formulario.id_actividad }}">Pendiente: {{ formulario.actividad}}</option>
+                                        {% endfor %}
+                                    </select>
+
+
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                    <div class="form-row field-respuesta">
+
+
+                        <div>
+
+                            <div class="flex-container">
+
+                                <label class="required" for="id_respuesta">Respuesta:</label>
+
+                                <select name="respuesta" required id="id_respuesta">
+                                    <option value="" selected>---------</option>
+
+                                    <option value="APROBADA">Aprobada</option>
+
+                                    <option value="REPROBADA">Reprobada</option>
+
+                                </select>
+
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                    <div class="form-row field-observaciones">
+
+
+                        <div>
+
+                            <div class="flex-container">
+
+                                <label for="id_observaciones">Observaciones:</label>
+
+                                <input type="text" name="observaciones" class="vTextField" maxlength="1000"
+                                    id="id_observaciones">
+
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                    <div class="form-row field-plazo_ini_observacion">
+
+
+                        <div>
+
+                            <div class="flex-container">
+
+                                <label>Plazo ini observacion:</label>
+
+                                <p class="datetime">
+                                    Date: <input type="text" name="plazo_ini_observacion_0" class="vDateField" size="10"
+                                        id="id_plazo_ini_observacion_0">
+
+                                    <br>
+                                    Time: <input type="text" name="plazo_ini_observacion_1" class="vTimeField" size="8"
+                                        id="id_plazo_ini_observacion_1">
+
+
+                                </p>
+
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                    <div class="form-row field-plazo_fin_observacion">
+
+
+                        <div>
+
+                            <div class="flex-container">
+
+                                <label>Plazo fin observacion:</label>
+
+                                <p class="datetime">
+                                    Date: <input type="text" name="plazo_fin_observacion_0" class="vDateField" size="10"
+                                        id="id_plazo_fin_observacion_0">
+
+                                    <br>
+                                    Time: <input type="text" name="plazo_fin_observacion_1" class="vTimeField" size="8"
+                                        id="id_plazo_fin_observacion_1">
+
+
+                                </p>
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </fieldset>
+                <div class="submit-row">
+
+                    <input type="submit" value="Save" class="default" name="_save">
+                </div>
+        </form>
+        <footer></footer>
     </div>
-    <footer></footer>
-</div>
 </body>
+
 </html>

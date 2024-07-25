@@ -393,13 +393,60 @@ def auditoria_view(request):
     return render(request, 'auditoria.html', context)
 
 
-def evalua_actividad_view(request, pk=None):
+def evalua_actividad_view(request):
+
+
+    if '_delete' in request.POST:
+        print(f'Entra a delete ')   
+        Auditorias_cb = request.POST.get('auditorias_cb')
+        print(f'ENCONTRADO: {Auditorias_cb}')
+        evaluacionActividad = get_object_or_404(EvaluacionActividad, id=Auditorias_cb) 
+        evaluacionActividad.delete()  
+        print('ELIMINADO')            
+        return redirect('EVALUA_ACTIVIDAD_EDITAR')
+    elif '_save' in request.POST:
+        print(f'Entra a _save ')
+        Auditorias_cb = request.POST.get('auditorias_cbb')
+        formulario_cb = request.POST.get('formulario_cb')
+        Auditoria_encontrado = get_object_or_404(Auditoria, id_auditar=Auditorias_cb) 
+        Formulario_encontrado = get_object_or_404(Formulario, id_actividad=formulario_cb) 
+        print(f'Auditoria_encontrado: {Auditoria_encontrado} ')
+        print(f'formulario_cb:  {formulario_cb} ')
+
+
+        respuesta = request.POST.get('respuesta')
+        observaciones = request.POST.get('observaciones')
+        plazo_ini_observacion = request.POST.get('plazo_ini_observacion')
+        plazo_fin_observacion = request.POST.get('plazo_fin_observacion')
+
+        evaluacion_EvaluacionActividad = EvaluacionActividad(
+        auditoria_id = Auditoria_encontrado,
+        id_actividad = Formulario_encontrado,
+        respuesta = respuesta,
+        observaciones = observaciones,
+        plazo_ini_observacion = plazo_ini_observacion,
+        plazo_fin_observacion = plazo_fin_observacion
+        )
+        print(f'creado:  {evaluacion_EvaluacionActividad} ')
+        evaluacion_EvaluacionActividad.save()
+        print(f'Guardado exitosamente ')
+        return redirect('EVALUA_ACTIVIDAD_EDITAR')
+
+
+
         
-    auditorias    = Auditoria.objects.all()
+    auditoria = Auditoria.objects.all()
+    agendaAuditorias = AgendaAuditorias.objects.all()
+    formulario = Formulario.objects.all()
+    evaluacionActividad = EvaluacionActividad.objects.all()
 
     context = {
-    'auditorias': auditorias,    
+    'AUDITORIA': auditoria,
+    'AGENDAAUDITORIAS':agendaAuditorias,
+    'FORMULARIO':formulario,
+    'EVALUACIONACTIVIDAD':evaluacionActividad,
     }
+
     return render(request, 'evualuar_actividades.html', context)
 
 def formulario_view(request, pk=None):

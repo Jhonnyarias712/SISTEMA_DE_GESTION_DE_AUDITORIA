@@ -69,12 +69,12 @@ class EvaluacionActividad(models.Model):
     auditoria_id = models.ForeignKey(Auditoria, on_delete=models.CASCADE)
     id_actividad = models.ForeignKey(Formulario, on_delete=models.CASCADE)
     respuesta = models.CharField(max_length=10, choices=[("APROBADA", "Aprobada"), ("REPROBADA", "Reprobada")])
-    observaciones = models.CharField(max_length=1000)
-    plazo_ini_observacion = models.DateTimeField()
-    plazo_fin_observacion = models.DateTimeField()
+    observaciones = models.CharField(max_length=1000,blank=True, null=True)
+    plazo_ini_observacion = models.DateTimeField(blank=True, null=True)
+    plazo_fin_observacion = models.DateTimeField(blank=True, null=True)
 
     def __str__(self):
-        return f"Evaluación: {self.id} - Estado Final: {self.respuesta} - Auditoría: {self.auditoria_id.id_auditar} - Observación: {self.observaciones}"
+        return f"Evaluación: {self.id_actividad.actividad} - Estado Final: {self.respuesta} - Auditoría: {self.auditoria_id.agenda_auditorias.nombre_entidad} - Observación: {self.observaciones}"
     
 class HistorialAuditoria(models.Model):
     id_historial = models.AutoField(primary_key=True)
